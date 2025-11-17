@@ -1,9 +1,13 @@
 <!doctype html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prize Draw Slot Machine</title>
+  <title>PGRI Sehat - Doorprize</title>
+  <link rel="shortcut icon" href="assets/images/98b614213cb75a54eb7bb3c9bd6bedee.png" />
+  <link rel="icon" href="assets/images/c395318e9a0605d5c14ad3fc5541d502.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="assets/images/3ef23f566dd3c0cdeebc7a98a1f8643a.png" sizes="180x180" />
   <style>
     body {
       box-sizing: border-box;
@@ -11,28 +15,55 @@
       padding: 0;
       height: 100%;
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      display: flex;
+      /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+      background-image: url('assets/images/background.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      /* display: flex;
       align-items: center;
-      justify-content: center;
-      overflow-y: auto;
+      justify-content: center; */
+      overflow-y: auto; 
     }
 
     .container {
       text-align: center;
-      padding: 40px;
+      /* background: white; */
+      /* border-radius: 20px; */
+      /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); */
+      max-width: 1000px;
+      width: 95%;
+      margin: 0 auto;
+    }
+
+    .container-wheel {
+      text-align: center;
+      padding: 20px 0;
       background: white;
       border-radius: 20px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      max-width: 1000px;
-      width: 95%;
-      margin: 20px auto;
+      /* max-width: auto; */
+      width: 70%;
+      margin: 10px auto;
+    }
+
+    .top-logos {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 70px;
+      box-sizing: border-box;
+    }
+
+    .top-logos img {
+      height: 85px;
+      object-fit: contain;
     }
 
     .title {
       font-size: 48px;
       font-weight: bold;
-      margin-bottom: 30px;
+      /* margin-bottom: 30px; */
       color: #667eea;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     }
@@ -142,8 +173,8 @@
 
     .menu-toggle-btn {
       position: fixed;
-      left: 20px;
-      top: 20px;
+      left: 10px;
+      top: 10px;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
       border: none;
@@ -217,7 +248,7 @@
       display: flex;
       justify-content: center;
       gap: 15px;
-      margin: 40px 0;
+      /* margin: 40px 0; */
       perspective: 1000px;
     }
 
@@ -234,7 +265,7 @@
     }
 
     .reel.spinning-active {
-      box-shadow: 
+      box-shadow:
         inset 0 4px 8px rgba(0, 0, 0, 0.2),
         0 0 20px rgba(102, 126, 234, 0.6),
         0 0 40px rgba(102, 126, 234, 0.4),
@@ -244,7 +275,7 @@
     }
 
     .reel.stopping-active {
-      box-shadow: 
+      box-shadow:
         inset 0 4px 8px rgba(0, 0, 0, 0.3),
         0 0 30px rgba(245, 87, 108, 0.8),
         0 0 60px rgba(245, 87, 108, 0.6),
@@ -333,31 +364,75 @@
     }
 
     @keyframes idle-spin {
-      0% { transform: translateY(0); }
-      25% { transform: translateY(-300px); }
-      50% { transform: translateY(-600px); }
-      75% { transform: translateY(-900px); }
-      100% { transform: translateY(-1200px); }
+      0% {
+        transform: translateY(0);
+      }
+
+      25% {
+        transform: translateY(-300px);
+      }
+
+      50% {
+        transform: translateY(-600px);
+      }
+
+      75% {
+        transform: translateY(-900px);
+      }
+
+      100% {
+        transform: translateY(-1200px);
+      }
     }
 
     @keyframes idle-spin-from-winner {
-      0% { transform: translateY(var(--idle-start-position, 0px)); }
-      25% { transform: translateY(calc(var(--idle-start-position, 0px) - 300px)); }
-      50% { transform: translateY(calc(var(--idle-start-position, 0px) - 600px)); }
-      75% { transform: translateY(calc(var(--idle-start-position, 0px) - 900px)); }
-      100% { transform: translateY(calc(var(--idle-start-position, 0px) - 1200px)); }
+      0% {
+        transform: translateY(var(--idle-start-position, 0px));
+      }
+
+      25% {
+        transform: translateY(calc(var(--idle-start-position, 0px) - 300px));
+      }
+
+      50% {
+        transform: translateY(calc(var(--idle-start-position, 0px) - 600px));
+      }
+
+      75% {
+        transform: translateY(calc(var(--idle-start-position, 0px) - 900px));
+      }
+
+      100% {
+        transform: translateY(calc(var(--idle-start-position, 0px) - 1200px));
+      }
     }
 
     @keyframes fast-spin {
-      0% { transform: translateY(var(--spin-offset, 0px)); }
-      100% { transform: translateY(calc(var(--spin-offset, 0px) - 1200px)); }
+      0% {
+        transform: translateY(var(--spin-offset, 0px));
+      }
+
+      100% {
+        transform: translateY(calc(var(--spin-offset, 0px) - 1200px));
+      }
     }
 
     @keyframes stop-spin {
-      0% { transform: translateY(0); }
-      70% { transform: translateY(calc(var(--final-position) + 30px)); }
-      85% { transform: translateY(calc(var(--final-position) - 10px)); }
-      100% { transform: translateY(var(--final-position)); }
+      0% {
+        transform: translateY(0);
+      }
+
+      70% {
+        transform: translateY(calc(var(--final-position) + 30px));
+      }
+
+      85% {
+        transform: translateY(calc(var(--final-position) - 10px));
+      }
+
+      100% {
+        transform: translateY(var(--final-position));
+      }
     }
 
     .symbol {
@@ -372,7 +447,7 @@
     }
 
     .spin-button {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      background: linear-gradient(135deg, #fee420 0%, #fda80f 100%);
       color: white;
       border: none;
       padding: 20px 60px;
@@ -384,6 +459,7 @@
       transition: all 0.3s ease;
       text-transform: uppercase;
       letter-spacing: 2px;
+      margin: 40px 0;
     }
 
     .spin-button:hover:not(:disabled) {
@@ -397,9 +473,9 @@
     }
 
     .winner-display {
-      margin-top: 30px;
+      /* margin-top: 30px; */
       padding: 25px;
-      background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+      background: linear-gradient(180deg, #fee420 0%, #fda80f 100%);
       border-radius: 15px;
       min-height: 60px;
       box-shadow: 0 4px 15px rgba(253, 203, 110, 0.4);
@@ -481,6 +557,7 @@
         opacity: 0;
         transform: translateX(-20px);
       }
+
       to {
         opacity: 1;
         transform: translateX(0);
@@ -603,11 +680,12 @@
     }
   </style>
 </head>
+
 <body>
   <!-- Menu Toggle Button -->
   <button class="menu-toggle-btn" onclick="toggleMenu()">
     <span>☰</span>
-    <span>Menu Data</span>
+    <!-- <span>Menu Data</span> -->
   </button>
 
   <!-- Menu Overlay -->
@@ -711,15 +789,24 @@
       <div class="error-message" id="errorMessage"></div>
     </div>
     <input type="file" id="csvFile" class="file-input" accept=".csv" onchange="handleFileUpload(event)">
-    <input type="file" id="spinSoundFile" class="file-input" accept="audio/*" onchange="handleSoundUpload(event, 'spin')">
-    <input type="file" id="winnerSoundFile" class="file-input" accept="audio/*" onchange="handleSoundUpload(event, 'winner')">
-    <input type="file" id="stopSoundFile" class="file-input" accept="audio/*" onchange="handleSoundUpload(event, 'stop')">
+    <input type="file" id="spinSoundFile" class="file-input" accept="audio/*"
+      onchange="handleSoundUpload(event, 'spin')">
+    <input type="file" id="winnerSoundFile" class="file-input" accept="audio/*"
+      onchange="handleSoundUpload(event, 'winner')">
+    <input type="file" id="stopSoundFile" class="file-input" accept="audio/*"
+      onchange="handleSoundUpload(event, 'stop')">
   </div>
 
+  <div class="top-logos">
+    <img src="assets/images/logo.png" alt="logo">
+    <img src="assets/images/logo2.png" alt="logo 2">
+  </div>
   <div class="container">
-    <div class="title" id="title">UNDIAN DOORPRIZE</div>
-    
-    <div class="slot-machine">
+    <div class="title" id="title">
+      <img src="assets/images/font.png" alt="font" style="height: 240px; vertical-align: middle;">
+    </div>
+
+    <div class="slot-machine container-wheel">
       <!-- Reel 1 -->
       <div class="reel">
         <div class="reel-content idle" id="reel1">
@@ -760,7 +847,8 @@
 
     <div style="display: flex; gap: 20px; justify-content: center; align-items: center;">
       <button class="spin-button" id="spinButton" onclick="spin()">PUTAR</button>
-      <button class="spin-button" id="stopButton" onclick="stopSpin()" style="display: none; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);">STOP</button>
+      <button class="spin-button" id="stopButton" onclick="stopSpin()"
+        style="display: none; background: linear-gradient(135deg, #fda80f 0%, #c0392b 100%); box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);">STOP</button>
     </div>
 
     <div class="winner-display" style="display: none;" id="winnerDisplaySection">
@@ -770,14 +858,17 @@
       <div class="winner-details" id="winnerDetails" style="display: none;"></div>
     </div>
 
-    <div class="winners-list" id="winnersList" style="margin-top: 30px; display: none;">
-      <div style="font-size: 24px; font-weight: bold; color: #667eea; margin-bottom: 15px;">
-        DAFTAR PEMENANG
+    <div class="container">
+      <div class="winners-list" id="winnersList" style="margin-top: 30px; display: none;">
+        <div style="font-size: 24px; font-weight: bold; color: #667eea; margin-bottom: 15px;">
+          DAFTAR PEMENANG
+        </div>
+        <div id="winnersContainer"></div>
       </div>
-      <div id="winnersContainer"></div>
     </div>
   </div>
-  
+
+
 
   <!-- Link Modal -->
   <div class="modal" id="linkModal">
@@ -790,7 +881,8 @@
         3. Pilih format "Comma-separated values (.csv)"<br>
         4. Copy link yang muncul dan paste di bawah
       </p>
-      <input type="text" class="textarea-input" id="sheetLink" placeholder="Paste link Google Sheet di sini (format CSV)" style="min-height: 50px;">
+      <input type="text" class="textarea-input" id="sheetLink"
+        placeholder="Paste link Google Sheet di sini (format CSV)" style="min-height: 50px;">
       <div class="modal-buttons">
         <button class="import-btn" onclick="closeLinkModal()">Batal</button>
         <button class="import-btn" onclick="processLinkImport()">Import</button>
@@ -803,9 +895,11 @@
     <div class="modal-content">
       <div class="modal-title">Import Data Peserta</div>
       <p style="color: #636e72; margin-bottom: 15px;">
-        Paste data dari Google Sheet atau Excel. Format: timestamp, nomor_pendaftaran, nik, nama, kategori, instansi, telepon, alamat
+        Paste data dari Google Sheet atau Excel. Format: timestamp, nomor_pendaftaran, nik, nama, kategori, instansi,
+        telepon, alamat
       </p>
-      <textarea class="textarea-input" id="pasteArea" placeholder="Paste data di sini (dengan header atau tanpa header)"></textarea>
+      <textarea class="textarea-input" id="pasteArea"
+        placeholder="Paste data di sini (dengan header atau tanpa header)"></textarea>
       <div class="modal-buttons">
         <button class="import-btn" onclick="closeImportModal()">Batal</button>
         <button class="import-btn" onclick="processImportData()">Import</button>
@@ -849,7 +943,7 @@
       updateParticipantCount();
       updateWinnersList();
       updateDataStats();
-      
+
       // Show winner display section
       document.getElementById('winnerDisplaySection').style.display = 'block';
     }
@@ -859,7 +953,7 @@
       for (let i = 1; i <= 6; i++) {
         const reel = document.getElementById(`reel${i}`);
         reel.innerHTML = '';
-        
+
         // Create 20 symbols (0-9 twice)
         for (let j = 0; j < 20; j++) {
           const symbol = document.createElement('div');
@@ -913,14 +1007,14 @@
       const statWinners = document.getElementById('statWinners');
       const statRemaining = document.getElementById('statRemaining');
       const statPercentage = document.getElementById('statPercentage');
-      
+
       if (participants.length > 0) {
         dataStats.style.display = 'block';
         statTotal.textContent = participants.length;
         statWinners.textContent = winners.length;
         const remaining = participants.length - winners.length;
         statRemaining.textContent = remaining;
-        
+
         const percentage = participants.length > 0 ? ((winners.length / participants.length) * 100).toFixed(1) : 0;
         statPercentage.textContent = `${percentage}%`;
       } else {
@@ -973,9 +1067,9 @@
       }
 
       const reader = new FileReader();
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         const audioData = e.target.result;
-        
+
         if (type === 'spin') {
           spinSoundData = audioData;
           localStorage.setItem('spinSound', audioData);
@@ -989,16 +1083,16 @@
           localStorage.setItem('stopSound', audioData);
           showError(`✓ Sound Stop berhasil diupload: ${file.name}`);
         }
-        
+
         updateSoundStatus();
         event.target.value = '';
       };
-      
-      reader.onerror = function() {
+
+      reader.onerror = function () {
         showError('Gagal membaca file audio');
         event.target.value = '';
       };
-      
+
       reader.readAsDataURL(file);
     }
 
@@ -1006,19 +1100,19 @@
       const savedSpinSound = localStorage.getItem('spinSound');
       const savedWinnerSound = localStorage.getItem('winnerSound');
       const savedStopSound = localStorage.getItem('stopSound');
-      
+
       if (savedSpinSound) {
         spinSoundData = savedSpinSound;
       }
-      
+
       if (savedWinnerSound) {
         winnerSoundData = savedWinnerSound;
       }
-      
+
       if (savedStopSound) {
         stopSoundData = savedStopSound;
       }
-      
+
       updateSoundStatus();
     }
 
@@ -1026,7 +1120,7 @@
       const spinStatus = document.getElementById('spinSoundStatus');
       const winnerStatus = document.getElementById('winnerSoundStatus');
       const stopStatus = document.getElementById('stopSoundStatus');
-      
+
       if (spinSoundData) {
         spinStatus.textContent = '✓ Aktif';
         spinStatus.style.color = '#27ae60';
@@ -1034,7 +1128,7 @@
         spinStatus.textContent = 'Tidak ada';
         spinStatus.style.color = '#e74c3c';
       }
-      
+
       if (winnerSoundData) {
         winnerStatus.textContent = '✓ Aktif';
         winnerStatus.style.color = '#27ae60';
@@ -1042,7 +1136,7 @@
         winnerStatus.textContent = 'Tidak ada';
         winnerStatus.style.color = '#e74c3c';
       }
-      
+
       if (stopSoundData) {
         stopStatus.textContent = '✓ Aktif';
         stopStatus.style.color = '#27ae60';
@@ -1057,11 +1151,11 @@
         try {
           // Hentikan sound spin sebelumnya jika ada
           stopSpinSound();
-          
+
           // Buat audio element baru
           spinAudio = new Audio(spinSoundData);
           spinAudio.loop = true; // Set loop ke true
-          
+
           // Coba play audio
           spinAudio.play().catch(error => {
             console.error('Error playing spin sound:', error);
@@ -1110,7 +1204,7 @@
     async function processLinkImport() {
       const linkInput = document.getElementById('sheetLink');
       const link = linkInput.value.trim();
-      
+
       if (!link) {
         showError('Silakan masukkan link Google Sheet');
         return;
@@ -1138,7 +1232,7 @@
         if (!response.ok) {
           throw new Error('Gagal mengambil data dari link');
         }
-        
+
         const text = await response.text();
         document.getElementById('pasteArea').value = text;
         await processImportData();
@@ -1169,10 +1263,10 @@
       const result = [];
       let current = '';
       let inQuotes = false;
-      
+
       for (let i = 0; i < line.length; i++) {
         const char = line[i];
-        
+
         if (char === '"') {
           inQuotes = !inQuotes;
         } else if (char === ',' && !inQuotes) {
@@ -1183,14 +1277,14 @@
         }
       }
       result.push(current.trim());
-      
+
       return result;
     }
 
     async function processImportData() {
       const pasteArea = document.getElementById('pasteArea');
       const data = pasteArea.value.trim();
-      
+
       if (!data) {
         showError('Tidak ada data untuk diimport');
         return;
@@ -1202,7 +1296,7 @@
       try {
         const lines = data.split('\n').filter(line => line.trim());
         let startIndex = 0;
-        
+
         // Check if first line is header
         const firstLine = lines[0].toLowerCase();
         if (firstLine.includes('timestamp') || firstLine.includes('nomor_pendaftaran') || firstLine.includes('nama')) {
@@ -1215,7 +1309,7 @@
 
         for (let i = startIndex; i < lines.length; i++) {
           const columns = parseCSVLine(lines[i]);
-          
+
           if (columns.length >= 8) {
             const participant = {
               timestamp: columns[0] || '',
@@ -1231,10 +1325,10 @@
 
             if (participant.nomor_pendaftaran && participant.nama) {
               // Check for duplicates based on nomor_pendaftaran
-              const isDuplicate = participants.some(p => 
+              const isDuplicate = participants.some(p =>
                 p.nomor_pendaftaran === participant.nomor_pendaftaran
               );
-              
+
               if (!isDuplicate) {
                 participants.push(participant);
                 successCount++;
@@ -1254,7 +1348,7 @@
         updateParticipantCount();
         updateDataStats();
         hideLoading();
-        
+
         let message = `Berhasil import ${successCount} peserta`;
         if (errorCount > 0) {
           message += `, ${errorCount} gagal`;
@@ -1263,7 +1357,7 @@
           }
         }
         showError(message);
-        
+
       } catch (error) {
         hideLoading();
         showError('Gagal memproses data: ' + error.message);
@@ -1277,13 +1371,13 @@
       showLoading();
 
       const reader = new FileReader();
-      reader.onload = async function(e) {
+      reader.onload = async function (e) {
         const text = e.target.result;
         document.getElementById('pasteArea').value = text;
         await processImportData();
         event.target.value = '';
       };
-      reader.onerror = function() {
+      reader.onerror = function () {
         hideLoading();
         showError('Gagal membaca file');
       };
@@ -1314,7 +1408,7 @@
     async function confirmClearData(button) {
       button.disabled = true;
       button.textContent = 'Menghapus...';
-      
+
       participants = [];
       winners = [];
       saveParticipantsToStorage();
@@ -1322,7 +1416,7 @@
       updateParticipantCount();
       updateWinnersList();
       updateDataStats();
-      
+
       button.closest('.modal').remove();
       showError('Semua data berhasil dihapus');
     }
@@ -1334,7 +1428,7 @@
       }
 
       let csvContent = "No,Nomor Pendaftaran,Nama,NIK,Kategori,Instansi,Telepon,Alamat\n";
-      
+
       winners.forEach((winner, index) => {
         const p = winner.participant;
         const row = [
@@ -1359,7 +1453,7 @@
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      
+
       showError(`✓ Daftar pemenang berhasil diexport (${winners.length} orang)`);
     }
 
@@ -1382,31 +1476,31 @@
       return new Promise((resolve) => {
         const reel = document.getElementById(reelId);
         const reelContainer = reel.parentElement;
-        
+
         // Remove idle state
         reel.classList.remove('idle');
-        
+
         // Add spinning state
         reel.classList.add('spinning');
         reelContainer.classList.add('spinning-active');
-        
+
         const timeout = setTimeout(() => {
           reel.classList.remove('spinning');
           reelContainer.classList.remove('spinning-active');
           reelContainer.classList.add('stopping-active');
-          
+
           // Set final position as CSS variable for stopping animation
           const offset = -finalNumber * 120;
           reel.style.setProperty('--final-position', `${offset}px`);
-          
+
           // Add stopping class
           reel.classList.add('stopping');
-          
+
           // Play stop sound for this reel
           setTimeout(() => {
             playStopSound();
           }, 200); // Small delay for better timing
-          
+
           // After stopping animation completes, set final position
           setTimeout(() => {
             reel.classList.remove('stopping');
@@ -1416,43 +1510,43 @@
             resolve();
           }, 1500); // Match the stopping animation duration
         }, duration);
-        
+
         spinTimeouts.push(timeout);
       });
     }
 
     async function stopSpin() {
       if (!canStop) return;
-      
+
       // Hentikan sound spin
       stopSpinSound();
-      
+
       // Get list of participants who haven't won yet
-      const availableParticipants = participants.filter(p => 
+      const availableParticipants = participants.filter(p =>
         !winners.some(w => w.participant.id === p.id)
       );
-      
+
       if (availableParticipants.length === 0) {
         showError('Semua peserta sudah pernah menang!');
         return;
       }
-      
+
       // Pick random participant from available ones
       const randomIndex = Math.floor(Math.random() * availableParticipants.length);
       const randomParticipant = availableParticipants[randomIndex];
       const winnerNumber = randomParticipant.nomor_pendaftaran;
-      
+
       // Extract only digits from nomor_pendaftaran
       const digitsOnly = winnerNumber.replace(/\D/g, '');
-      
+
       // Pad or trim to 6 digits
       let paddedNumber = digitsOnly.padStart(6, '0');
       if (paddedNumber.length > 6) {
         paddedNumber = paddedNumber.slice(-6); // Take last 6 digits
       }
-      
+
       const digits = paddedNumber.split('').map(d => parseInt(d));
-      
+
       // Stop reels one by one with delay
       await Promise.all([
         spinReel('reel1', 500, digits[0], 0),
@@ -1462,13 +1556,13 @@
         spinReel('reel5', 1700, digits[4], 4),
         spinReel('reel6', 2000, digits[5], 5)
       ]);
-      
+
       const winnerLabel = config.winner_label || defaultConfig.winner_label;
       const winnerDisplay = document.getElementById('winnerDisplay');
       const winnerDetails = document.getElementById('winnerDetails');
-      
+
       winnerDisplay.innerHTML = `<span class="winner-label">${winnerLabel}</span> ${winnerNumber}`;
-      
+
       // Show winner details
       winnerDetails.style.display = 'block';
       winnerDetails.innerHTML = `
@@ -1501,7 +1595,7 @@
           <div class="winner-detail-value">${randomParticipant.alamat}</div>
         </div>
       `;
-      
+
       // Add to winners list
       winners.push({
         number: winnerNumber,
@@ -1512,37 +1606,37 @@
       updateWinnersList();
       updateParticipantCount();
       updateDataStats();
-      
+
       // Play winner sound
       playWinnerSound();
-      
+
       createConfetti();
-      
+
       // Reset reels to idle state after showing winner
       setTimeout(() => {
         document.querySelectorAll('.reel-content').forEach((reel, index) => {
           reel.classList.remove('stopping');
-          
+
           // Add delay class if this is not the first spin
           if (hasSpunOnce) {
             reel.classList.add('delayed');
-            
+
             // Set custom CSS property for starting position based on winner number
             const winnerDigit = digits[index];
             const startOffset = -winnerDigit * 120;
             reel.style.setProperty('--idle-start-position', `${startOffset}px`);
           }
-          
+
           reel.classList.add('idle');
           reel.style.transition = 'none';
           reel.style.removeProperty('--final-position');
         });
-        
+
         // Remove all reel container effects
         document.querySelectorAll('.reel').forEach(reelContainer => {
           reelContainer.classList.remove('spinning-active', 'stopping-active');
         });
-        
+
         // Enable spin button based on whether we need to wait for idle animation
         const spinButton = document.getElementById('spinButton');
         if (hasSpunOnce) {
@@ -1559,11 +1653,11 @@
           spinButton.style.cursor = 'pointer';
         }
       }, 3000);
-      
+
       // Hide stop button, show spin button
       document.getElementById('stopButton').style.display = 'none';
       document.getElementById('spinButton').style.display = 'block';
-      
+
       canStop = false;
       isSpinning = false;
       spinTimeouts = [];
@@ -1572,7 +1666,7 @@
 
     async function spin() {
       if (isSpinning) return;
-      
+
       if (participants.length === 0) {
         showError('Belum ada data peserta. Silakan import data terlebih dahulu.');
         return;
@@ -1582,51 +1676,51 @@
         showError('Semua peserta sudah pernah menang!');
         return;
       }
-      
+
       isSpinning = true;
       const spinButton = document.getElementById('spinButton');
       const stopButton = document.getElementById('stopButton');
-      
+
       // Disable spin button immediately
       spinButton.disabled = true;
       spinButton.style.opacity = '0.6';
       spinButton.style.cursor = 'not-allowed';
-      
+
       spinButton.style.display = 'none';
       stopButton.style.display = 'block';
-      
+
       // Enable stop after 1 second
       setTimeout(() => {
         canStop = true;
       }, 1000);
-      
+
       // Play spin sound (akan terus berulang)
       playSpinSound();
-      
+
       const winnerDisplaySection = document.getElementById('winnerDisplaySection');
       const winnerDisplay = document.getElementById('winnerDisplay');
       const winnerDetails = document.getElementById('winnerDetails');
-      
+
       winnerDisplaySection.style.display = 'block';
       winnerDisplay.innerHTML = '<span class="winner-label">Mengundi... Tekan STOP untuk berhenti</span>';
       winnerDetails.style.display = 'none';
-      
+
       // Start spinning all reels with cascade effect
       const reels = ['reel1', 'reel2', 'reel3', 'reel4', 'reel5', 'reel6'];
-      
+
       reels.forEach((reelId, index) => {
         const reel = document.getElementById(reelId);
         const reelContainer = reel.parentElement;
-        
+
         // Start spinning with cascade effect
         setTimeout(() => {
           reel.classList.remove('idle', 'delayed');
           reel.classList.add('spinning');
           reelContainer.classList.add('spinning-active');
-          
+
           // Reset transform when starting to spin
           reel.style.transform = '';
-          
+
           // Add random offset to make each reel show different digits
           const randomOffset = Math.floor(Math.random() * 10) * 120;
           reel.style.setProperty('--spin-offset', `-${randomOffset}px`);
@@ -1637,11 +1731,11 @@
     function updateWinnersList() {
       const winnersList = document.getElementById('winnersList');
       const winnersContainer = document.getElementById('winnersContainer');
-      
+
       if (winners.length > 0) {
         winnersList.style.display = 'block';
         winnersContainer.innerHTML = '';
-        
+
         winners.forEach((winner, index) => {
           const winnerItem = document.createElement('div');
           winnerItem.className = 'winner-item';
@@ -1658,9 +1752,10 @@
     }
 
     // Initialize the app when the page loads
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       initializeApp();
     });
   </script>
 </body>
+
 </html>
