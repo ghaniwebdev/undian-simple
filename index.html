@@ -15,21 +15,14 @@
       padding: 0;
       height: 100%;
       font-family: 'Arial', sans-serif;
-      /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
       background-image: url('assets/images/background.png');
       background-size: contain;
       background-repeat: no-repeat;
-      /* display: flex;
-      align-items: center;
-      justify-content: center; */
       overflow-y: auto; 
     }
 
     .container {
       text-align: center;
-      /* background: white; */
-      /* border-radius: 20px; */
-      /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); */
       max-width: 1000px;
       width: 95%;
       margin: 0 auto;
@@ -37,12 +30,12 @@
 
     .container-wheel {
       text-align: center;
-      padding: 20px 0;
+      padding: 20px;
       background: white;
       border-radius: 20px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      /* max-width: auto; */
-      width: 70%;
+      max-width: 4000px;
+      width: 80%;
       margin: 10px auto;
     }
 
@@ -66,6 +59,7 @@
       /* margin-bottom: 30px; */
       color: #667eea;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 30% 0 0 0;
     }
 
     .side-menu {
@@ -247,13 +241,13 @@
     .slot-machine {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 60px;
       /* margin: 40px 0; */
       perspective: 1000px;
     }
 
     .reel {
-      width: 90px;
+      width: 120px;
       height: 120px;
       background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
       border: 4px solid #667eea;
@@ -440,7 +434,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 56px;
+      font-size: 100px;
       font-weight: bold;
       color: #667eea;
       flex-shrink: 0;
@@ -459,7 +453,6 @@
       transition: all 0.3s ease;
       text-transform: uppercase;
       letter-spacing: 2px;
-      margin: 40px 0;
     }
 
     .spin-button:hover:not(:disabled) {
@@ -473,8 +466,9 @@
     }
 
     .winner-display {
-      /* margin-top: 30px; */
-      padding: 25px;
+      /* margin-top: 10px; */
+      margin: 10px auto 25px auto;
+      padding: 10px;
       background: linear-gradient(180deg, #fee420 0%, #fda80f 100%);
       border-radius: 15px;
       min-height: 60px;
@@ -489,13 +483,15 @@
     }
 
     .winner-label {
-      font-size: 18px;
-      color: #636e72;
+      font-size: 32px;
+      font-weight: bold;
+      /* color: #636e72; */
+      color: #2d3436;
       margin-right: 10px;
     }
 
     .winner-details {
-      margin-top: 15px;
+      /* margin-top: 15px; */
       padding: 15px;
       background: white;
       border-radius: 10px;
@@ -797,16 +793,19 @@
       onchange="handleSoundUpload(event, 'stop')">
   </div>
 
-  <div class="top-logos">
+  <!-- <div class="top-logos">
     <img src="assets/images/logo.png" alt="logo">
     <img src="assets/images/logo2.png" alt="logo 2">
-  </div>
+  </div> -->
   <div class="container">
     <div class="title" id="title">
-      <img src="assets/images/font.png" alt="font" style="height: 240px; vertical-align: middle;">
+      <div></div>
+      <!-- <img src="assets/images/font.png" alt="font" style="height: 240px; vertical-align: middle;"> -->
     </div>
+  </div>
 
-    <div class="slot-machine container-wheel">
+  <div class="container-wheel">
+    <div class="slot-machine">
       <!-- Reel 1 -->
       <div class="reel">
         <div class="reel-content idle" id="reel1">
@@ -844,7 +843,9 @@
         </div>
       </div>
     </div>
+  </div>
 
+  <div class="container">
     <div style="display: flex; gap: 20px; justify-content: center; align-items: center;">
       <button class="spin-button" id="spinButton" onclick="spin()">PUTAR</button>
       <button class="spin-button" id="stopButton" onclick="stopSpin()"
@@ -859,7 +860,7 @@
     </div>
 
     <div class="container">
-      <div class="winners-list" id="winnersList" style="margin-top: 30px; display: none;">
+      <div class="winners-list" id="winnersList" style="margin-top: 125px; display: none;">
         <div style="font-size: 24px; font-weight: bold; color: #667eea; margin-bottom: 15px;">
           DAFTAR PEMENANG
         </div>
@@ -867,8 +868,6 @@
       </div>
     </div>
   </div>
-
-
 
   <!-- Link Modal -->
   <div class="modal" id="linkModal">
@@ -946,6 +945,36 @@
 
       // Show winner display section
       document.getElementById('winnerDisplaySection').style.display = 'block';
+
+      setupKeyboardControls();
+    }
+
+    // Setup keyboard controls
+    function setupKeyboardControls() {
+      document.addEventListener('keydown', function(event) {
+        // Jika tombol Enter ditekan
+        if (event.key === 'Enter' || event.keyCode === 13) {
+          // Cek apakah sedang dalam mode spinning
+          if (isSpinning) {
+            // Jika sedang spinning, tekan tombol STOP
+            if (canStop) {
+              stopSpin();
+            }
+          } else {
+            // Jika tidak spinning, tekan tombol PUTAR
+            const spinButton = document.getElementById('spinButton');
+            if (!spinButton.disabled && spinButton.style.display !== 'none') {
+              spin();
+            }
+          }
+          event.preventDefault(); // Mencegah perilaku default (misalnya submit form)
+        }
+        
+        // Tombol Escape untuk menutup modal atau menu
+        if (event.key === 'Escape' || event.keyCode === 27) {
+          closeAllModalsAndMenus();
+        }
+      });
     }
 
     // Generate symbols for all reels
@@ -1567,30 +1596,23 @@
       winnerDetails.style.display = 'block';
       winnerDetails.innerHTML = `
         <div class="winner-detail-row">
-          <div class="winner-detail-label">Nomor Pendaftaran:</div>
-          <div class="winner-detail-value">${randomParticipant.nomor_pendaftaran}</div>
-        </div>
-        <div class="winner-detail-row">
           <div class="winner-detail-label">Nama:</div>
           <div class="winner-detail-value">${randomParticipant.nama}</div>
-        </div>
-        <div class="winner-detail-row">
-          <div class="winner-detail-label">NIK:</div>
-          <div class="winner-detail-value">${randomParticipant.nik}</div>
-        </div>
-        <div class="winner-detail-row">
-          <div class="winner-detail-label">Kategori:</div>
-          <div class="winner-detail-value">${randomParticipant.kategori}</div>
-        </div>
-        <div class="winner-detail-row">
+
           <div class="winner-detail-label">Instansi:</div>
           <div class="winner-detail-value">${randomParticipant.instansi}</div>
         </div>
         <div class="winner-detail-row">
+          <div class="winner-detail-label">NIK:</div>
+          <div class="winner-detail-value">${randomParticipant.nik}</div>
+
           <div class="winner-detail-label">Telepon:</div>
           <div class="winner-detail-value">${randomParticipant.telepon}</div>
         </div>
         <div class="winner-detail-row">
+          <div class="winner-detail-label">Kategori:</div>
+          <div class="winner-detail-value">${randomParticipant.kategori}</div>
+
           <div class="winner-detail-label">Alamat:</div>
           <div class="winner-detail-value">${randomParticipant.alamat}</div>
         </div>
