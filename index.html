@@ -11,7 +11,7 @@
   <style>
     body {
       box-sizing: border-box;
-      margin: 0;
+      margin: 300px 0;
       padding: 0;
       height: 100%;
       font-family: 'Arial', sans-serif;
@@ -23,7 +23,7 @@
 
     .container {
       text-align: center;
-      max-width: 1000px;
+      max-width: 4000px;
       width: 95%;
       margin: 0 auto;
     }
@@ -444,7 +444,7 @@
       background: linear-gradient(135deg, #fee420 0%, #fda80f 100%);
       color: white;
       border: none;
-      padding: 20px 60px;
+      padding: 10px 30px;
       font-size: 24px;
       font-weight: bold;
       border-radius: 50px;
@@ -702,6 +702,49 @@
     .stat-value {
       color: #2d3436;
     }
+
+    .sponsor-marquee {
+      width: 100%;
+      background: #fff8;
+      color: #000;
+      padding: 5px 0;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .sponsor-under-button {
+      margin-top: 15px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .sponsor-under-button img {
+      height: 35px;
+      margin: 5px;
+      vertical-align: middle;
+    }
+
+    .sponsor-footer {
+      margin-top: 10px;
+      padding: 20px;
+      text-align: center;
+      background: #00000020;
+      backdrop-filter: blur(6px);
+      border-top: 2px solid #fff3;
+      border-radius: 12px;
+    }
+
+    .sponsor-footer p {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .sponsor-logos img {
+      height: 40px;
+      margin: 0 10px;
+      filter: drop-shadow(1px 1px 3px #0008);
+    }
   </style>
 </head>
 
@@ -820,18 +863,12 @@
     <input type="file" id="stopSoundFile" class="file-input" accept="audio/*"
       onchange="handleSoundUpload(event, 'stop')">
   </div>
-
-  <!-- <div class="top-logos">
-    <img src="assets/images/logo.png" alt="logo">
-    <img src="assets/images/logo2.png" alt="logo 2">
-  </div> -->
-  <div class="container">
-    <div class="title" id="title">
-      <div></div>
-      <!-- <img src="assets/images/font.png" alt="font" style="height: 240px; vertical-align: middle;"> -->
-    </div>
+  
+  <div class="sponsor-marquee">
+    <marquee behavior="scroll" direction="left">
+      🔔 Sponsored by: Bank Hasamitra • Surya Indah • PDAM • Forum MGMP/BK SMP Kab. Bone • MGMP IPS SMP Kab. Bone • Alumni BCKS Kab. Bone 🔔
+    </marquee>
   </div>
-
   <div class="container-wheel">
     <div class="slot-machine">
       <!-- Reel 1 -->
@@ -878,6 +915,13 @@
       <button class="spin-button" id="spinButton" onclick="spin()">PUTAR</button>
       <button class="spin-button" id="stopButton" onclick="stopSpin()"
         style="display: none; background: linear-gradient(135deg, #fda80f 0%, #c0392b 100%); box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);">STOP</button>
+    </div>
+
+    <!-- Area Sponsor B -->
+    <div class="sponsor-under-button">
+      <span>Didukung oleh:</span>
+      <img src="logo1.png">
+      <img src="logo2.png">
     </div>
 
     <div class="winner-display" style="display: none;" id="winnerDisplaySection">
@@ -935,6 +979,20 @@
     </div>
   </div>
 
+  <footer class="sponsor-footer">
+      <p>Sponsored by:</p>
+      <div class="sponsor-logos">
+        <img src="#" alt="Sponsor 1">
+        <img src="#" alt="Sponsor 2">
+        <img src="#" alt="Sponsor 3">
+        <img src="#" alt="Sponsor 3">
+        <img src="#" alt="Sponsor 3">
+        <img src="#" alt="Sponsor 3">
+        <img src="#" alt="Sponsor 3">
+        <img src="#" alt="Sponsor 3">
+        <img src="#" alt="Sponsor 3">
+      </div>
+    </footer>
   <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
   <script>
     // Configuration
@@ -1542,36 +1600,36 @@
       //   }, i * 30);
       // }
       const duration = 15 * 1000,
-  animationEnd = Date.now() + duration,
-  defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+        animationEnd = Date.now() + duration,
+        defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-function randomInRange(min, max) {
-  return Math.random() * (max - min) + min;
-}
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
 
-const interval = setInterval(function() {
-  const timeLeft = animationEnd - Date.now();
+      const interval = setInterval(function () {
+        const timeLeft = animationEnd - Date.now();
 
-  if (timeLeft <= 0) {
-    return clearInterval(interval);
-  }
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
 
-  const particleCount = 50 * (timeLeft / duration);
+        const particleCount = 50 * (timeLeft / duration);
 
-  // since particles fall down, start a bit higher than random
-  confetti(
-    Object.assign({}, defaults, {
-      particleCount,
-      origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-    })
-  );
-  confetti(
-    Object.assign({}, defaults, {
-      particleCount,
-      origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-    })
-  );
-}, 250);
+        // since particles fall down, start a bit higher than random
+        confetti(
+          Object.assign({}, defaults, {
+            particleCount,
+            origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+          })
+        );
+        confetti(
+          Object.assign({}, defaults, {
+            particleCount,
+            origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+          })
+        );
+      }, 250);
     }
 
     function spinReel(reelId, duration, finalNumber, reelIndex) {
@@ -1717,7 +1775,7 @@ const interval = setInterval(function() {
       //   origin: { x: 0, y: 0.9 },
       // });
 
-      
+
 
       // Reset reels to idle state after showing winner
       setTimeout(() => {
@@ -1870,8 +1928,3 @@ const interval = setInterval(function() {
 
 
 </html>
-
-
-
-
-
