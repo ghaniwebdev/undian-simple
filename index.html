@@ -1675,6 +1675,16 @@
       playWinnerSound();
 
       createConfetti();
+      confetti({
+        particleCount: 500,
+        spread: 70,
+        origin: { x: 1, y: 0.6 },
+      });
+      confetti({
+        particleCount: 500,
+        spread: 70,
+        origin: { x: 0, y: 0.6 },
+      });
 
       // Reset reels to idle state after showing winner
       setTimeout(() => {
@@ -1827,6 +1837,7 @@
 
 
 </html>
+
 
 
 
