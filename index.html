@@ -9,13 +9,23 @@
   <link rel="icon" href="assets/images/c395318e9a0605d5c14ad3fc5541d502.png" sizes="192x192" />
   <link rel="apple-touch-icon" href="assets/images/3ef23f566dd3c0cdeebc7a98a1f8643a.png" sizes="180x180" />
   <style>
+    :root {
+      --accent: #ffb74d;
+      --glass-bg: rgba(255, 255, 255, 0.12);
+      --glass-border: rgba(255, 255, 255, 0.22);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.75);
+      --card-radius: 18px;
+      --card-padding: 22px;
+    }
+
     body {
       box-sizing: border-box;
       margin: 300px 0;
       padding: 0;
       height: 100%;
       font-family: 'Arial', sans-serif;
-      background-image: url(assets/images/DOORPRIZE.png); 
+      background-image: url(assets/images/DOORPRIZE.png);
       background-size: 100%;
       background-repeat: no-repeat;
       overflow-y: auto;
@@ -492,13 +502,46 @@
     }
 
     .winner-display {
-      /* margin-top: 10px; */
-      margin: 10px auto 25px auto;
+      /* 
       padding: 10px;
       background: linear-gradient(180deg, #fee420 0%, #fda80f 100%);
       border-radius: 15px;
       min-height: 60px;
-      box-shadow: 0 4px 15px rgba(253, 203, 110, 0.4);
+      box-shadow: 0 4px 15px rgba(253, 203, 110, 0.4); */
+      width: 70%;
+      margin: 10px auto 25px;
+      background: linear-gradient(180deg, #fee420 0%, #fda80f 100%);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--card-radius);
+      padding: var(--card-padding);
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(10px) saturate(120%);
+      -webkit-backdrop-filter: blur(10px) saturate(120%);
+      position: relative;
+      overflow: visible;
+      transform-origin: center;
+      animation: cardPop .6s cubic-bezier(.2, .9, .3, 1);
+    }
+
+    /* subtle shiny band */
+    .winner-display::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.0) 40%);
+      mix-blend-mode: overlay;
+    }
+
+    .title-winner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: space-between;
     }
 
     .winner-text {
@@ -509,17 +552,25 @@
     }
 
     .winner-label {
-      font-size: 32px;
+      /* font-size: 32px;
       font-weight: bold;
-      /* color: #636e72; */
+      margin-right: 10px; */
+      /* color: var(--accent); */
       color: #2d3436;
-      margin-right: 10px;
+      background: linear-gradient(90deg, rgba(255, 183, 77, 0.08), rgba(255, 183, 77, 0.04));
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      font-size: 2rem;
+      border: 1px solid rgba(45, 52, 54, 0.18);
+      margin-bottom: 20px;
     }
 
     .winner-details {
-      /* margin-top: 15px; */
-      padding: 15px;
-      background: white;
+      margin-top: 15px;
+      padding: 15px 45px;
+      /* background: white; */
       border-radius: 10px;
       text-align: left;
     }
@@ -527,7 +578,7 @@
     .winner-detail-row {
       display: flex;
       padding: 8px 0;
-      border-bottom: 1px solid #e9ecef;
+      /* border-bottom: 1px solid #e9ecef; */
     }
 
     .winner-detail-row:last-child {
@@ -543,6 +594,66 @@
     .winner-detail-value {
       color: #2d3436;
       flex: 1;
+    }
+
+    /* glow animation */
+    @keyframes glow {
+      0% {
+        box-shadow: 0 0 0 rgba(255, 183, 77, 0);
+        transform: translateY(0);
+      }
+
+      50% {
+        box-shadow: 0 12px 30px rgba(255, 183, 77, 0.12);
+        transform: translateY(-4px);
+      }
+
+      100% {
+        box-shadow: 0 0 0 rgba(255, 183, 77, 0);
+        transform: translateY(0);
+      }
+    }
+
+    /* pop animation */
+    @keyframes cardPop {
+      0% {
+        transform: scale(.96) translateY(8px);
+        opacity: 0
+      }
+
+      60% {
+        transform: scale(1.02) translateY(-6px);
+        opacity: 1
+      }
+
+      100% {
+        transform: scale(1) translateY(0);
+        opacity: 1
+      }
+    }
+
+    /* Reveal effect for code text */
+    .reveal {
+      /* color: var(--accent); */
+      display: inline-block;
+      transform-origin: bottom;
+      animation: revealScale .5s ease both;
+    }
+
+    @keyframes revealScale {
+      0% {
+        transform: scaleX(0);
+        opacity: 0;
+      }
+
+      60% {
+        transform: scaleX(1.04);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scaleX(1);
+      }
     }
 
     .confetti {
@@ -965,6 +1076,16 @@
 
       // Show winner display section
       document.getElementById('winnerDisplaySection').style.display = 'block';
+      // add glow briefly
+      const card = document.getElementById('winnerDisplaySection');
+      card.style.animation = 'none';
+      // force reflow to restart animation
+      void card.offsetWidth;
+      card.style.animation = 'cardPop .6s cubic-bezier(.2,.9,.3,1)';
+
+      // subtle glow via classless inline style
+      card.style.boxShadow = '0 20px 50px rgba(255,183,77,0.12)';
+      setTimeout(() => card.style.boxShadow = '0 8px 30px rgba(0,0,0,0.35)', 900);
 
       startButtonAnimation();
       setupKeyboardControls();
@@ -1518,18 +1639,6 @@
     }
 
     function createConfetti() {
-      // const colors = ['#f093fb', '#f5576c', '#ffeaa7', '#74b9ff', '#a29bfe'];
-      // for (let i = 0; i < 50; i++) {
-      //   setTimeout(() => {
-      //     const confetti = document.createElement('div');
-      //     confetti.className = 'confetti';
-      //     confetti.style.left = Math.random() * 100 + '%';
-      //     confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-      //     confetti.style.animationDelay = Math.random() * 0.5 + 's';
-      //     document.body.appendChild(confetti);
-      //     setTimeout(() => confetti.remove(), 3000);
-      //   }, i * 30);
-      // }
       const duration = 15 * 1000,
         animationEnd = Date.now() + duration,
         defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
@@ -1652,31 +1761,37 @@
       const winnerDisplay = document.getElementById('winnerDisplay');
       const winnerDetails = document.getElementById('winnerDetails');
 
-      winnerDisplay.innerHTML = `<span class="winner-label">${winnerLabel}</span> ${winnerNumber}`;
+      // add glow briefly
+      const card = document.getElementById('winnerDisplaySection');
+      card.style.animation = 'none';
+      // force reflow to restart animation
+      void card.offsetWidth;
+      card.style.animation = 'cardPop .6s cubic-bezier(.2,.9,.3,1)';
+
+      // subtle glow via classless inline style
+      card.style.boxShadow = '0 20px 50px rgba(255,183,77,0.12)';
+      setTimeout(() => card.style.boxShadow = '0 8px 30px rgba(0,0,0,0.35)', 900);
+
+      winnerDisplay.innerHTML = `
+      <div class="title-winner">
+        <span class="winner-label"><span class="reveal">🏆 ${winnerLabel} ${randomParticipant.nama}</span></span>
+        <span class="winner-label"><span class="reveal">${winnerNumber}</span></span>  
+      </div>`;
 
       // Show winner details
       winnerDetails.style.display = 'block';
       winnerDetails.innerHTML = `
         <div class="winner-detail-row">
-          <div class="winner-detail-label">Nama:</div>
-          <div class="winner-detail-value">${randomParticipant.nama}</div>
-
           <div class="winner-detail-label">Instansi:</div>
           <div class="winner-detail-value">${randomParticipant.instansi}</div>
-        </div>
-        <div class="winner-detail-row">
           <div class="winner-detail-label">NIK:</div>
           <div class="winner-detail-value">${randomParticipant.nik}</div>
-
-          <div class="winner-detail-label">Telepon:</div>
-          <div class="winner-detail-value">${randomParticipant.telepon}</div>
         </div>
         <div class="winner-detail-row">
+          <div class="winner-detail-label">Telepon:</div>
+          <div class="winner-detail-value">${randomParticipant.telepon}</div>
           <div class="winner-detail-label">Kategori:</div>
           <div class="winner-detail-value">${randomParticipant.kategori}</div>
-
-          <div class="winner-detail-label">Alamat:</div>
-          <div class="winner-detail-value">${randomParticipant.alamat}</div>
         </div>
       `;
 
@@ -1695,18 +1810,6 @@
       playWinnerSound();
 
       createConfetti();
-      // confetti({
-      //   particleCount: 500,
-      //   spread: 70,
-      //   origin: { x: 1, y: 0.9 },
-      // });
-      // confetti({
-      //   particleCount: 500,
-      //   spread: 70,
-      //   origin: { x: 0, y: 0.9 },
-      // });
-
-
 
       // Reset reels to idle state after showing winner
       setTimeout(() => {
@@ -1797,6 +1900,17 @@
       playSpinSound();
 
       const winnerDisplaySection = document.getElementById('winnerDisplaySection');
+      // add glow briefly
+      const card = document.getElementById('winnerDisplaySection');
+      card.style.animation = 'none';
+      // force reflow to restart animation
+      void card.offsetWidth;
+      card.style.animation = 'cardPop .6s cubic-bezier(.2,.9,.3,1)';
+
+      // subtle glow via classless inline style
+      card.style.boxShadow = '0 20px 50px rgba(255,183,77,0.12)';
+      setTimeout(() => card.style.boxShadow = '0 8px 30px rgba(0,0,0,0.35)', 900);
+
       const winnerDisplay = document.getElementById('winnerDisplay');
       const winnerDetails = document.getElementById('winnerDetails');
 
@@ -1856,4 +1970,5 @@
     });
   </script>
 </body>
+
 </html>
