@@ -1,0 +1,2497 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PGRI Sehat - Doorprize</title>
+  <link rel="shortcut icon" href="assets/images/98b614213cb75a54eb7bb3c9bd6bedee.png" />
+  <link rel="icon" href="assets/images/c395318e9a0605d5c14ad3fc5541d502.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="assets/images/3ef23f566dd3c0cdeebc7a98a1f8643a.png" sizes="180x180" />
+  <style>
+    :root {
+      --accent: #ffb74d;
+      --glass-bg: rgba(255, 255, 255, 0.12);
+      --glass-border: rgba(255, 255, 255, 0.22);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.75);
+      --card-radius: 18px;
+      --card-padding: 10px 22px;
+    }
+
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Arial', sans-serif;
+      background-image: url(assets/images/DOORPRIZE.png);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .main-container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+      margin-top: 20px;
+    }
+
+    .top-logos {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+    }
+
+    .top-logos img {
+      height: 85px;
+      object-fit: contain;
+    }
+
+    .title {
+      font-size: 48px;
+      font-weight: bold;
+      color: #667eea;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .container-wheel {
+      text-align: center;
+      padding: 20px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 900px;
+      margin: 20px auto;
+    }
+
+    .slot-machine {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      perspective: 1000px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .reel {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+      border: 4px solid #667eea;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    @media (max-width: 768px) {
+      .reel {
+        width: 70px;
+        height: 70px;
+      }
+    }
+
+    .reel.spinning-active {
+      box-shadow:
+        inset 0 4px 8px rgba(0, 0, 0, 0.2),
+        0 0 20px rgba(102, 126, 234, 0.6),
+        0 0 40px rgba(102, 126, 234, 0.4),
+        0 0 60px rgba(102, 126, 234, 0.2);
+      border-color: #f093fb;
+      transform: scale(1.05);
+    }
+
+    .reel.stopping-active {
+      box-shadow:
+        inset 0 4px 8px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(245, 87, 108, 0.8),
+        0 0 60px rgba(245, 87, 108, 0.6),
+        0 0 90px rgba(245, 87, 108, 0.4);
+      border-color: #f5576c;
+      transform: scale(1.08);
+    }
+
+    .reel-content {
+      position: absolute;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      transition: none;
+    }
+
+    .reel-content.idle {
+      animation: idle-spin 5s linear infinite;
+    }
+
+    .reel-content.idle.delayed {
+      animation: idle-spin-from-winner 5s linear infinite;
+      animation-delay: 30s;
+    }
+
+    #reel1.idle {
+      animation: idle-spin 5s linear infinite;
+    }
+
+    #reel1.idle.delayed {
+      animation: idle-spin-from-winner 5s linear infinite;
+      animation-delay: 30s;
+    }
+
+    #reel2.idle {
+      animation: idle-spin 5.5s linear infinite;
+    }
+
+    #reel2.idle.delayed {
+      animation: idle-spin-from-winner 5.5s linear infinite;
+      animation-delay: 30s;
+    }
+
+    #reel3.idle {
+      animation: idle-spin 6s linear infinite;
+    }
+
+    #reel3.idle.delayed {
+      animation: idle-spin-from-winner 6s linear infinite;
+      animation-delay: 30s;
+    }
+
+    #reel4.idle {
+      animation: idle-spin 6.5s linear infinite;
+    }
+
+    #reel4.idle.delayed {
+      animation: idle-spin-from-winner 6.5s linear infinite;
+      animation-delay: 30s;
+    }
+
+    #reel5.idle {
+      animation: idle-spin 7s linear infinite;
+    }
+
+    #reel5.idle.delayed {
+      animation: idle-spin-from-winner 7s linear infinite;
+      animation-delay: 30s;
+    }
+
+    #reel6.idle {
+      animation: idle-spin 7.5s linear infinite;
+    }
+
+    #reel6.idle.delayed {
+      animation: idle-spin-from-winner 7.5s linear infinite;
+      animation-delay: 30s;
+    }
+
+    .reel-content.spinning {
+      animation: fast-spin 0.02s linear infinite;
+    }
+
+    .reel-content.stopping {
+      animation: stop-spin 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    @keyframes idle-spin {
+      0% {
+        transform: translateY(0);
+      }
+      25% {
+        transform: translateY(-300px);
+      }
+      50% {
+        transform: translateY(-600px);
+      }
+      75% {
+        transform: translateY(-900px);
+      }
+      100% {
+        transform: translateY(-1200px);
+      }
+    }
+
+    @keyframes idle-spin-from-winner {
+      0% {
+        transform: translateY(var(--idle-start-position, 0px));
+      }
+      25% {
+        transform: translateY(calc(var(--idle-start-position, 0px) - 300px));
+      }
+      50% {
+        transform: translateY(calc(var(--idle-start-position, 0px) - 600px));
+      }
+      75% {
+        transform: translateY(calc(var(--idle-start-position, 0px) - 900px));
+      }
+      100% {
+        transform: translateY(calc(var(--idle-start-position, 0px) - 1200px));
+      }
+    }
+
+    @keyframes fast-spin {
+      0% {
+        transform: translateY(var(--spin-offset, 0px));
+      }
+      100% {
+        transform: translateY(calc(var(--spin-offset, 0px) - 1200px));
+      }
+    }
+
+    @keyframes stop-spin {
+      0% {
+        transform: translateY(0);
+      }
+      70% {
+        transform: translateY(calc(var(--final-position) + 30px));
+      }
+      85% {
+        transform: translateY(calc(var(--final-position) - 10px));
+      }
+      100% {
+        transform: translateY(var(--final-position));
+      }
+    }
+
+    .symbol {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      font-weight: bold;
+      color: #667eea;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .symbol {
+        height: 70px;
+        font-size: 40px;
+      }
+    }
+
+    .spin-button {
+      background: linear-gradient(135deg, #fee420 0%, #fda80f 100%);
+      color: white;
+      border: none;
+      padding: 10px 30px;
+      font-size: 24px;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin: 10px;
+    }
+
+    .spin-button:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(245, 87, 108, 0.5);
+    }
+
+    .spin-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .spin-button.idle {
+      animation: colorPulse 0.75s ease-in-out infinite;
+    }
+
+    @keyframes colorPulse {
+      0% {
+        background: linear-gradient(135deg, #fee420 0%, #fda80f 100%);
+        box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+      }
+      50% {
+        background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+      }
+      100% {
+        background: linear-gradient(135deg, #fee420 0%, #fda80f 100%);
+        box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+      }
+    }
+
+    .spin-button.idle:hover {
+      animation: none;
+      background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+    }
+
+    .winner-display {
+      width: 90%;
+      max-width: 800px;
+      margin: 20px auto;
+      background: linear-gradient(180deg, #fee420 0%, #fda80f 100%);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--card-radius);
+      padding: var(--card-padding);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: center;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(10px) saturate(120%);
+      -webkit-backdrop-filter: blur(10px) saturate(120%);
+      position: relative;
+      overflow: hidden;
+      transform-origin: center;
+      animation: cardPop .6s cubic-bezier(.2, .9, .3, 1);
+    }
+
+    /* subtle shiny band */
+    .winner-display::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.0) 40%);
+      mix-blend-mode: overlay;
+    }
+
+    .title-winner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: space-between;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .winner-text {
+      font-size: 32px;
+      font-weight: bold;
+      color: #2d3436;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    }
+
+    @media (max-width: 768px) {
+      .winner-text {
+        font-size: 24px;
+      }
+    }
+
+    .winner-label {
+      color: #2d3436;
+      background: linear-gradient(90deg, rgba(255, 183, 77, 0.08), rgba(255, 183, 77, 0.04));
+      padding: 8px 14px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      font-size: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .winner-label {
+        font-size: 1.5rem;
+      }
+    }
+
+    .winner-details {
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .winner-details {
+        padding: 0 10px;
+      }
+    }
+
+    .winner-detail-row {
+      display: flex;
+      padding: 8px 0;
+      gap: 18px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .winner-detail-label {
+      font-weight: bold;
+      color: #636e72;
+      min-width: 150px;
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .winner-detail-value {
+      color: #2d3436;
+      flex: 1;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .winner-detail-value {
+        font-size: 1.2rem;
+      }
+    }
+
+    .winner-detail-left {
+      flex: 0 0 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .winner-detail-right {
+      flex: 1;
+      min-width: 220px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .winner-detail-right {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .winner-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #667eea, #f093fb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 36px;
+      font-weight: 800;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    }
+
+    @media (max-width: 768px) {
+      .winner-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 24px;
+      }
+    }
+
+    .winner-detail-name {
+      text-align: center;
+      font-weight: 700;
+      color: #2d3436;
+    }
+
+    .winner-nomor {
+      font-size: 12px;
+      color: #636e72;
+      text-align: center;
+    }
+
+    .winner-detail-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--glass-border);
+      border-radius: var(--card-radius);
+      padding: var(--card-padding);
+      gap:18px;
+      align-items:center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px) saturate(120%);
+      -webkit-backdrop-filter: blur(10px) saturate(120%);
+      position:relative;
+      overflow:visible;
+      transform-origin:center;
+      animation: cardPop .6s cubic-bezier(.2,.9,.3,1);
+    }
+
+    /* glow animation */
+    @keyframes glow {
+      0% {
+        box-shadow: 0 0 0 rgba(255, 183, 77, 0);
+        transform: translateY(0);
+      }
+      50% {
+        box-shadow: 0 12px 30px rgba(255, 183, 77, 0.12);
+        transform: translateY(-4px);
+      }
+      100% {
+        box-shadow: 0 0 0 rgba(255, 183, 77, 0);
+        transform: translateY(0);
+      }
+    }
+
+    /* pop animation */
+    @keyframes cardPop {
+      0% {
+        transform: scale(.96) translateY(8px);
+        opacity: 0
+      }
+      60% {
+        transform: scale(1.02) translateY(-6px);
+        opacity: 1
+      }
+      100% {
+        transform: scale(1) translateY(0);
+        opacity: 1
+      }
+    }
+
+    /* Reveal effect for code text */
+    .reveal {
+      display: inline-block;
+      transform-origin: bottom;
+      animation: revealScale .5s ease both;
+    }
+
+    @keyframes revealScale {
+      0% {
+        transform: scaleX(0);
+        opacity: 0;
+      }
+      60% {
+        transform: scaleX(1.04);
+        opacity: 1;
+      }
+      100% {
+        transform: scaleX(1);
+      }
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: #f093fb;
+      position: absolute;
+      animation: confetti-fall 3s linear;
+    }
+
+    @keyframes confetti-fall {
+      to {
+        transform: translateY(100%) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .winner-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+      margin: 10px 0;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 10px;
+      border-left: 5px solid #667eea;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .winner-rank {
+      font-size: 20px;
+      font-weight: bold;
+      color: #667eea;
+      min-width: 120px;
+    }
+
+    .winner-number {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2d3436;
+      letter-spacing: 2px;
+      flex: 1;
+    }
+
+    .winner-name {
+      font-size: 18px;
+      color: #636e72;
+      text-align: right;
+    }
+
+    /* Side menu styles */
+    .side-menu {
+      position: fixed;
+      left: -350px;
+      top: 0;
+      width: 350px;
+      height: 100%;
+      background: white;
+      box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
+      transition: left 0.3s ease;
+      z-index: 2000;
+      overflow-y: auto;
+    }
+
+    .side-menu.open {
+      left: 0;
+    }
+
+    .side-menu-header {
+      padding: 25px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .side-menu-title {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .close-menu-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      font-size: 28px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .close-menu-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(90deg);
+    }
+
+    .side-menu-content {
+      padding: 20px;
+    }
+
+    .menu-section {
+      margin-bottom: 25px;
+    }
+
+    .menu-section-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e9ecef;
+    }
+
+    .import-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .import-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .import-btn:hover {
+      background: #5568d3;
+      transform: translateX(5px);
+    }
+
+    .import-btn.danger {
+      background: #e74c3c;
+    }
+
+    .import-btn.danger:hover {
+      background: #c0392b;
+    }
+
+    .menu-toggle-btn {
+      position: fixed;
+      left: 10px;
+      top: 10px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      transition: all 0.3s ease;
+      z-index: 1500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-toggle-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    }
+
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1900;
+    }
+
+    .menu-overlay.active {
+      display: block;
+    }
+
+    .participant-count {
+      font-size: 16px;
+      color: #2d3436;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    .textarea-input {
+      width: 100%;
+      min-height: 150px;
+      padding: 15px;
+      border: 2px solid #667eea;
+      border-radius: 10px;
+      font-family: monospace;
+      font-size: 14px;
+      margin-top: 10px;
+      box-sizing: border-box;
+    }
+
+    .data-stats {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      text-align: left;
+    }
+
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .stat-item:last-child {
+      border-bottom: none;
+    }
+
+    .stat-label {
+      font-weight: bold;
+      color: #636e72;
+    }
+
+    .stat-value {
+      color: #2d3436;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80%;
+      overflow-y: auto;
+    }
+
+    .modal-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 20px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    .loading {
+      display: none;
+      color: #667eea;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .loading.active {
+      display: block;
+    }
+
+    .error-message {
+      display: none;
+      color: #e74c3c;
+      font-weight: bold;
+      margin-top: 10px;
+      padding: 10px;
+      background: #fadbd8;
+      border-radius: 5px;
+    }
+
+    .error-message.active {
+      display: block;
+    }
+
+    .winners-list {
+      width: 90%;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .button-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #636e72;
+    }
+
+    .tts-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .tts-btn {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .tts-btn:hover {
+      background: #219653;
+    }
+
+    .tts-btn:disabled {
+      background: #95a5a6;
+      cursor: not-allowed;
+    }
+
+    .tts-btn.stop {
+      background: #e74c3c;
+    }
+
+    .tts-btn.stop:hover {
+      background: #c0392b;
+    }
+
+    .tts-settings {
+      margin-top: 10px;
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .tts-setting-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .tts-setting-label {
+      font-weight: bold;
+      color: #636e72;
+    }
+
+    .tts-setting-value {
+      color: #2d3436;
+      font-weight: bold;
+    }
+
+    .tts-slider {
+      width: 100%;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Menu Toggle Button -->
+  <button class="menu-toggle-btn" onclick="toggleMenu()">
+    <span>☰</span>
+  </button>
+
+  <!-- Menu Overlay -->
+  <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+  <!-- Side Menu -->
+  <div class="side-menu" id="sideMenu">
+    <div class="side-menu-header">
+      <div class="side-menu-title">📊 Data Peserta</div>
+      <button class="close-menu-btn" onclick="closeMenu()">×</button>
+    </div>
+    <div class="side-menu-content">
+      <div class="menu-section">
+        <div class="menu-section-title">Import Data</div>
+        <div class="import-buttons">
+          <button class="import-btn" onclick="showLinkModal()">
+            <span>🔗</span>
+            <span>Link Google Sheet</span>
+          </button>
+          <button class="import-btn" onclick="showImportModal()">
+            <span>📋</span>
+            <span>Paste Data</span>
+          </button>
+          <button class="import-btn" onclick="document.getElementById('csvFile').click()">
+            <span>📁</span>
+            <span>Upload CSV</span>
+          </button>
+        </div>
+      </div>
+      <div class="menu-section">
+        <div class="menu-section-title">Status</div>
+        <div class="participant-count" id="participantCount">
+          Belum ada data peserta
+        </div>
+        <div class="data-stats" id="dataStats" style="display: none;">
+          <div class="stat-item">
+            <span class="stat-label">Total Peserta:</span>
+            <span class="stat-value" id="statTotal">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Sudah Menang:</span>
+            <span class="stat-value" id="statWinners">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Belum Menang:</span>
+            <span class="stat-value" id="statRemaining">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Persentase:</span>
+            <span class="stat-value" id="statPercentage">0%</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-section">
+        <div class="menu-section-title">Sound Effect</div>
+        <div class="import-buttons">
+          <button class="import-btn" onclick="document.getElementById('spinSoundFile').click()">
+            <span>🎵</span>
+            <span>Upload Sound Spin</span>
+          </button>
+          <button class="import-btn" onclick="document.getElementById('winnerSoundFile').click()">
+            <span>🎉</span>
+            <span>Upload Sound Winner</span>
+          </button>
+          <button class="import-btn" onclick="document.getElementById('stopSoundFile').click()">
+            <span>🔊</span>
+            <span>Upload Sound Stop (6x)</span>
+          </button>
+        </div>
+        <div style="margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 8px; font-size: 14px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+            <span style="font-weight: bold;">Spin:</span>
+            <span id="spinSoundStatus" style="color: #e74c3c;">Tidak ada</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+            <span style="font-weight: bold;">Winner:</span>
+            <span id="winnerSoundStatus" style="color: #e74c3c;">Tidak ada</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-weight: bold;">Stop (6x):</span>
+            <span id="stopSoundStatus" style="color: #e74c3c;">Tidak ada</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-section">
+        <div class="menu-section-title">Pengaturan Suara Pemenang</div>
+        <div class="import-buttons">
+          <button class="import-btn" onclick="toggleTTS()" id="ttsToggleBtn">
+            <span>🔊</span>
+            <span id="ttsToggleText">Aktifkan Suara Pemenang</span>
+          </button>
+        </div>
+        <div class="tts-settings" id="ttsSettings" style="display: none;">
+          <div class="tts-setting-item">
+            <span class="tts-setting-label">Kecepatan:</span>
+            <span class="tts-setting-value" id="ttsRateValue">1.0</span>
+          </div>
+          <input type="range" min="0.5" max="1.5" step="0.1" value="1.0" class="tts-slider" id="ttsRateSlider" onchange="updateTtsRate(this.value)">
+          
+          <div class="tts-setting-item">
+            <span class="tts-setting-label">Nada:</span>
+            <span class="tts-setting-value" id="ttsPitchValue">1.2</span>
+          </div>
+          <input type="range" min="0.5" max="2" step="0.1" value="1.2" class="tts-slider" id="ttsPitchSlider" onchange="updateTtsPitch(this.value)">
+          
+          <div class="tts-setting-item">
+            <span class="tts-setting-label">Volume:</span>
+            <span class="tts-setting-value" id="ttsVolumeValue">1.0</span>
+          </div>
+          <input type="range" min="0.1" max="1" step="0.1" value="1.0" class="tts-slider" id="ttsVolumeSlider" onchange="updateTtsVolume(this.value)">
+          
+          <div class="tts-setting-item">
+            <span class="tts-setting-label">Jeda Antar Angka:</span>
+            <span class="tts-setting-value" id="ttsPauseValue">0.3s</span>
+          </div>
+          <input type="range" min="0.1" max="1" step="0.1" value="0.3" class="tts-slider" id="ttsPauseSlider" onchange="updateTtsPause(this.value)">
+        </div>
+        <div style="margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 8px; font-size: 14px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+            <span style="font-weight: bold;">Status TTS:</span>
+            <span id="ttsStatus" style="color: #e74c3c;">Nonaktif</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-section">
+        <div class="menu-section-title">Kelola Data</div>
+        <div class="import-buttons">
+          <button class="import-btn danger" onclick="clearAllData()">
+            <span>🗑️</span>
+            <span>Hapus Semua Data</span>
+          </button>
+          <button class="import-btn" onclick="exportWinners()">
+            <span>📥</span>
+            <span>Export Daftar Pemenang</span>
+          </button>
+        </div>
+      </div>
+      <div class="loading" id="loadingIndicator">
+        Memproses data...
+      </div>
+      <div class="error-message" id="errorMessage"></div>
+    </div>
+    <input type="file" id="csvFile" class="file-input" accept=".csv" onchange="handleFileUpload(event)">
+    <input type="file" id="spinSoundFile" class="file-input" accept="audio/*"
+      onchange="handleSoundUpload(event, 'spin')">
+    <input type="file" id="winnerSoundFile" class="file-input" accept="audio/*"
+      onchange="handleSoundUpload(event, 'winner')">
+    <input type="file" id="stopSoundFile" class="file-input" accept="audio/*"
+      onchange="handleSoundUpload(event, 'stop')">
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-container">
+    <div class="top-logos">
+      <img src="assets/images/98b614213cb75a54eb7bb3c9bd6bedee.png" alt="Logo PGRI">
+      <img src="assets/images/c395318e9a0605d5c14ad3fc5541d502.png" alt="Logo PGRI">
+    </div>
+
+    <div class="title">UNDIAN DOORPRIZE PGRI SEHAT</div>
+
+    <div class="container-wheel">
+      <div class="slot-machine">
+        <!-- Reel 1 -->
+        <div class="reel">
+          <div class="reel-content idle" id="reel1">
+            <!-- Symbols will be generated by JavaScript -->
+          </div>
+        </div>
+        <!-- Reel 2 -->
+        <div class="reel">
+          <div class="reel-content idle" id="reel2">
+            <!-- Symbols will be generated by JavaScript -->
+          </div>
+        </div>
+        <!-- Reel 3 -->
+        <div class="reel">
+          <div class="reel-content idle" id="reel3">
+            <!-- Symbols will be generated by JavaScript -->
+          </div>
+        </div>
+        <!-- Reel 4 -->
+        <div class="reel">
+          <div class="reel-content idle" id="reel4">
+            <!-- Symbols will be generated by JavaScript -->
+          </div>
+        </div>
+        <!-- Reel 5 -->
+        <div class="reel">
+          <div class="reel-content idle" id="reel5">
+            <!-- Symbols will be generated by JavaScript -->
+          </div>
+        </div>
+        <!-- Reel 6 -->
+        <div class="reel">
+          <div class="reel-content idle" id="reel6">
+            <!-- Symbols will be generated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button class="spin-button idle" id="spinButton" onclick="spin()">PUTAR</button>
+        <button class="spin-button" id="stopButton" onclick="stopSpin()"
+          style="display: none; background: linear-gradient(135deg, #fda80f 0%, #c0392b 100%); box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);">STOP</button>
+      </div>
+    </div>
+
+    <div class="winner-display" id="winnerDisplaySection">
+      <div class="winner-text" id="winnerDisplay">
+        <span class="winner-label">Tekan tombol untuk mulai</span>
+      </div>
+      <div class="winner-details" id="winnerDetails" style="display: none;"></div>
+      <div class="tts-controls" id="ttsControls" style="display: none;">
+        <button class="tts-btn" id="ttsButton" onclick="speakWinnerNumber()">
+          <span>🔊</span>
+          <span>Dengarkan Nomor Pemenang</span>
+        </button>
+        <button class="tts-btn stop" id="stopTtsButton" onclick="stopSpeaking()" style="display: none;">
+          <span>⏹️</span>
+          <span>Berhenti</span>
+        </button>
+      </div>
+      <div class="copyright">Copyright &copy; DKV SMKN 8 Bone</div>
+    </div>
+
+    <div class="winners-list" id="winnersList" style="display: none;">
+      <div style="font-size: 24px; font-weight: bold; color: #667eea; margin-bottom: 15px; text-align: center;">
+        DAFTAR PEMENANG
+      </div>
+      <div id="winnersContainer"></div>
+    </div>
+  </div>
+
+  <!-- Link Modal -->
+  <div class="modal" id="linkModal">
+    <div class="modal-content">
+      <div class="modal-title">Import dari Google Sheet</div>
+      <p style="color: #636e72; margin-bottom: 15px;">
+        <strong>Cara menggunakan:</strong><br>
+        1. Buka Google Sheet Anda<br>
+        2. Klik File → Share → Publish to web<br>
+        3. Pilih format "Comma-separated values (.csv)"<br>
+        4. Copy link yang muncul dan paste di bawah
+      </p>
+      <input type="text" class="textarea-input" id="sheetLink"
+        placeholder="Paste link Google Sheet di sini (format CSV)" style="min-height: 50px;">
+      <div class="modal-buttons">
+        <button class="import-btn" onclick="closeLinkModal()">Batal</button>
+        <button class="import-btn" onclick="processLinkImport()">Import</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Import Modal -->
+  <div class="modal" id="importModal">
+    <div class="modal-content">
+      <div class="modal-title">Import Data Peserta</div>
+      <p style="color: #636e72; margin-bottom: 15px;">
+        Paste data dari Google Sheet atau Excel. Format: timestamp, nomor_pendaftaran, nik, nama, kategori, instansi,
+        telepon, alamat
+      </p>
+      <textarea class="textarea-input" id="pasteArea"
+        placeholder="Paste data di sini (dengan header atau tanpa header)"></textarea>
+      <div class="modal-buttons">
+        <button class="import-btn" onclick="closeImportModal()">Batal</button>
+        <button class="import-btn" onclick="processImportData()">Import</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+  <script>
+    // Configuration
+    const defaultConfig = {
+      title_text: "UNDIAN DOORPRIZE",
+      button_text: "PUTAR",
+      winner_label: "PEMENANG:",
+      background_color: "#667eea",
+      secondary_color: "#f093fb",
+      text_color: "#2d3436",
+      primary_action_color: "#f5576c",
+      secondary_action_color: "#764ba2",
+      font_family: "Arial",
+      font_size: 16
+    };
+
+    let config = { ...defaultConfig };
+    let isSpinning = false;
+    let winners = [];
+    let participants = [];
+    let spinSoundData = null;
+    let winnerSoundData = null;
+    let stopSoundData = null;
+    let spinTimeouts = [];
+    let canStop = false;
+    let hasSpunOnce = false;
+    let spinAudio = null;
+    let currentWinnerNumber = null;
+    let ttsEnabled = false;
+    let speechSynthesis = window.speechSynthesis;
+    let currentUtterance = null;
+    
+    // TTS Settings
+    let ttsSettings = {
+      rate: 1.0,    // Kecepatan bicara (0.1 - 10)
+      pitch: 1.2,   // Nada suara (0 - 2)
+      volume: 1.0,  // Volume (0 - 1)
+      pauseBetweenDigits: 0.3 // Jeda antar angka (detik)
+    };
+
+    // Initialize the application
+    function initializeApp() {
+      loadParticipantsFromStorage();
+      loadWinnersFromStorage();
+      loadSoundsFromStorage();
+      loadTtsSettings();
+      generateReelSymbols();
+      updateParticipantCount();
+      updateWinnersList();
+      updateDataStats();
+      updateTtsStatus();
+
+      // Show winner display section
+      document.getElementById('winnerDisplaySection').style.display = 'flex';
+      
+      // add glow briefly
+      const card = document.getElementById('winnerDisplaySection');
+      card.style.animation = 'none';
+      // force reflow to restart animation
+      void card.offsetWidth;
+      card.style.animation = 'cardPop .6s cubic-bezier(.2,.9,.3,1)';
+
+      // subtle glow via classless inline style
+      card.style.boxShadow = '0 20px 50px rgba(255,183,77,0.12)';
+      setTimeout(() => card.style.boxShadow = '0 8px 30px rgba(0,0,0,0.35)', 900);
+
+      setupKeyboardControls();
+    }
+
+    function setupKeyboardControls() {
+      document.addEventListener('keydown', function (event) {
+        // Jika tombol Enter ditekan
+        if (event.key === 'Enter' || event.keyCode === 13) {
+          // Cek apakah sedang dalam mode spinning
+          if (isSpinning) {
+            // Jika sedang spinning, tekan tombol STOP
+            if (canStop) {
+              stopSpin();
+            }
+          } else {
+            // Jika tidak spinning, tekan tombol PUTAR
+            const spinButton = document.getElementById('spinButton');
+            if (!spinButton.disabled && spinButton.style.display !== 'none') {
+              spin();
+            }
+          }
+          event.preventDefault(); // Mencegah perilaku default (misalnya submit form)
+        }
+
+        // Tombol Escape untuk menutup modal atau menu
+        if (event.key === 'Escape' || event.keyCode === 27) {
+          closeAllModalsAndMenus();
+        }
+      });
+    }
+
+    // Generate symbols for all reels
+    function generateReelSymbols() {
+      for (let i = 1; i <= 6; i++) {
+        const reel = document.getElementById(`reel${i}`);
+        reel.innerHTML = '';
+
+        // Create 20 symbols (0-9 twice)
+        for (let j = 0; j < 20; j++) {
+          const symbol = document.createElement('div');
+          symbol.className = 'symbol';
+          symbol.textContent = j % 10;
+          reel.appendChild(symbol);
+        }
+      }
+    }
+
+    // Load participants from localStorage
+    function loadParticipantsFromStorage() {
+      const stored = localStorage.getItem('participants');
+      if (stored) {
+        participants = JSON.parse(stored);
+      }
+    }
+
+    // Save participants to localStorage
+    function saveParticipantsToStorage() {
+      localStorage.setItem('participants', JSON.stringify(participants));
+    }
+
+    // Load winners from localStorage
+    function loadWinnersFromStorage() {
+      const stored = localStorage.getItem('winners');
+      if (stored) {
+        winners = JSON.parse(stored);
+      }
+    }
+
+    // Save winners to localStorage
+    function saveWinnersToStorage() {
+      localStorage.setItem('winners', JSON.stringify(winners));
+    }
+
+    // Load TTS settings
+    function loadTtsSettings() {
+      const stored = localStorage.getItem('ttsEnabled');
+      if (stored !== null) {
+        ttsEnabled = JSON.parse(stored);
+      }
+      
+      const storedTtsSettings = localStorage.getItem('ttsSettings');
+      if (storedTtsSettings) {
+        ttsSettings = { ...ttsSettings, ...JSON.parse(storedTtsSettings) };
+        updateTtsSliders();
+      }
+    }
+
+    // Save TTS settings
+    function saveTtsSettings() {
+      localStorage.setItem('ttsEnabled', JSON.stringify(ttsEnabled));
+      localStorage.setItem('ttsSettings', JSON.stringify(ttsSettings));
+    }
+
+    // Update TTS sliders to match current settings
+    function updateTtsSliders() {
+      document.getElementById('ttsRateSlider').value = ttsSettings.rate;
+      document.getElementById('ttsPitchSlider').value = ttsSettings.pitch;
+      document.getElementById('ttsVolumeSlider').value = ttsSettings.volume;
+      document.getElementById('ttsPauseSlider').value = ttsSettings.pauseBetweenDigits;
+      
+      document.getElementById('ttsRateValue').textContent = ttsSettings.rate.toFixed(1);
+      document.getElementById('ttsPitchValue').textContent = ttsSettings.pitch.toFixed(1);
+      document.getElementById('ttsVolumeValue').textContent = ttsSettings.volume.toFixed(1);
+      document.getElementById('ttsPauseValue').textContent = ttsSettings.pauseBetweenDigits.toFixed(1) + 's';
+    }
+
+    // Toggle TTS
+    function toggleTTS() {
+      ttsEnabled = !ttsEnabled;
+      saveTtsSettings();
+      updateTtsStatus();
+      
+      const ttsSettingsElement = document.getElementById('ttsSettings');
+      if (ttsEnabled) {
+        ttsSettingsElement.style.display = 'block';
+        showError('Fitur suara pemenang telah diaktifkan');
+      } else {
+        ttsSettingsElement.style.display = 'none';
+        showError('Fitur suara pemenang telah dinonaktifkan');
+        stopSpeaking();
+      }
+    }
+
+    // Update TTS settings
+    function updateTtsRate(value) {
+      ttsSettings.rate = parseFloat(value);
+      document.getElementById('ttsRateValue').textContent = value;
+      saveTtsSettings();
+    }
+
+    function updateTtsPitch(value) {
+      ttsSettings.pitch = parseFloat(value);
+      document.getElementById('ttsPitchValue').textContent = value;
+      saveTtsSettings();
+    }
+
+    function updateTtsVolume(value) {
+      ttsSettings.volume = parseFloat(value);
+      document.getElementById('ttsVolumeValue').textContent = value;
+      saveTtsSettings();
+    }
+
+    function updateTtsPause(value) {
+      ttsSettings.pauseBetweenDigits = parseFloat(value);
+      document.getElementById('ttsPauseValue').textContent = value + 's';
+      saveTtsSettings();
+    }
+
+    // Update TTS status display
+    function updateTtsStatus() {
+      const ttsStatus = document.getElementById('ttsStatus');
+      const ttsToggleText = document.getElementById('ttsToggleText');
+      const ttsSettingsElement = document.getElementById('ttsSettings');
+      
+      if (ttsEnabled) {
+        ttsStatus.textContent = 'Aktif';
+        ttsStatus.style.color = '#27ae60';
+        ttsToggleText.textContent = 'Nonaktifkan Suara Pemenang';
+        ttsSettingsElement.style.display = 'block';
+      } else {
+        ttsStatus.textContent = 'Nonaktif';
+        ttsStatus.style.color = '#e74c3c';
+        ttsToggleText.textContent = 'Aktifkan Suara Pemenang';
+        ttsSettingsElement.style.display = 'none';
+      }
+    }
+
+    // Function to speak the winner number with better clarity
+    function speakWinnerNumber() {
+      if (!ttsEnabled || !currentWinnerNumber) return;
+      
+      // Stop any ongoing speech
+      stopSpeaking();
+      
+      // Split number into individual digits for clearer pronunciation
+      const digits = currentWinnerNumber.split('');
+      let fullText = `Nomor pemenang adalah `;
+      
+      // Add each digit with a slight pause for clarity
+      digits.forEach((digit, index) => {
+        fullText += digit;
+        if (index < digits.length - 1) {
+          fullText += '... ';
+        }
+      });
+      
+      // Create utterance for the winner number
+      const utterance = new SpeechSynthesisUtterance();
+      utterance.text = fullText;
+      utterance.lang = 'id-ID';
+      utterance.rate = ttsSettings.rate;
+      utterance.pitch = ttsSettings.pitch;
+      utterance.volume = ttsSettings.volume;
+      
+      // Set up event handlers
+      utterance.onstart = function() {
+        document.getElementById('ttsButton').style.display = 'none';
+        document.getElementById('stopTtsButton').style.display = 'block';
+      };
+      
+      utterance.onend = function() {
+        document.getElementById('ttsButton').style.display = 'block';
+        document.getElementById('stopTtsButton').style.display = 'none';
+        currentUtterance = null;
+      };
+      
+      utterance.onerror = function(event) {
+        console.error('Speech synthesis error:', event);
+        document.getElementById('ttsButton').style.display = 'block';
+        document.getElementById('stopTtsButton').style.display = 'none';
+        currentUtterance = null;
+        
+        // Fallback: try with English voice if Indonesian is not available
+        if (event.error === 'voice-not-found') {
+          utterance.lang = 'en-US';
+          speechSynthesis.speak(utterance);
+        }
+      };
+      
+      // Try to set Indonesian voice with higher pitch for clarity
+      const voices = speechSynthesis.getVoices();
+      
+      // Prefer female voices for clearer articulation
+      let preferredVoice = voices.find(voice => 
+        voice.lang === 'id-ID' && 
+        (voice.name.includes('Perempuan') || voice.name.toLowerCase().includes('female'))
+      );
+      
+      // If no Indonesian female voice, try any Indonesian voice
+      if (!preferredVoice) {
+        preferredVoice = voices.find(voice => voice.lang === 'id-ID');
+      }
+      
+      // If still no Indonesian voice, try English female voice
+      if (!preferredVoice) {
+        preferredVoice = voices.find(voice => 
+          voice.lang.startsWith('en') && 
+          (voice.name.toLowerCase().includes('female') || voice.name.toLowerCase().includes('woman'))
+        );
+      }
+      
+      // Final fallback: any English voice
+      if (!preferredVoice) {
+        preferredVoice = voices.find(voice => voice.lang.startsWith('en'));
+      }
+      
+      if (preferredVoice) {
+        utterance.voice = preferredVoice;
+      }
+      
+      currentUtterance = utterance;
+      speechSynthesis.speak(utterance);
+    }
+
+    // Alternative method for even clearer digit-by-digit pronunciation
+    function speakDigitsClearly() {
+      if (!ttsEnabled || !currentWinnerNumber) return;
+      
+      stopSpeaking();
+      
+      const digits = currentWinnerNumber.split('');
+      let currentIndex = 0;
+      
+      function speakNextDigit() {
+        if (currentIndex >= digits.length) {
+          document.getElementById('ttsButton').style.display = 'block';
+          document.getElementById('stopTtsButton').style.display = 'none';
+          return;
+        }
+        
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = digits[currentIndex];
+        utterance.lang = 'id-ID';
+        utterance.rate = ttsSettings.rate;
+        utterance.pitch = ttsSettings.pitch;
+        utterance.volume = ttsSettings.volume;
+        
+        utterance.onend = function() {
+          currentIndex++;
+          setTimeout(speakNextDigit, ttsSettings.pauseBetweenDigits * 1000);
+        };
+        
+        utterance.onerror = function() {
+          currentIndex++;
+          setTimeout(speakNextDigit, ttsSettings.pauseBetweenDigits * 1000);
+        };
+        
+        // Try to set a clear voice
+        const voices = speechSynthesis.getVoices();
+        const preferredVoice = voices.find(voice => 
+          voice.lang === 'id-ID' || voice.lang.startsWith('en')
+        );
+        
+        if (preferredVoice) {
+          utterance.voice = preferredVoice;
+        }
+        
+        speechSynthesis.speak(utterance);
+      }
+      
+      document.getElementById('ttsButton').style.display = 'none';
+      document.getElementById('stopTtsButton').style.display = 'block';
+      
+      // Start with announcement
+      const introUtterance = new SpeechSynthesisUtterance();
+      introUtterance.text = "Nomor pemenang adalah";
+      introUtterance.lang = 'id-ID';
+      introUtterance.rate = ttsSettings.rate;
+      introUtterance.pitch = ttsSettings.pitch;
+      introUtterance.volume = ttsSettings.volume;
+      
+      introUtterance.onend = function() {
+        setTimeout(speakNextDigit, 500);
+      };
+      
+      speechSynthesis.speak(introUtterance);
+    }
+
+    // Function to stop speaking
+    function stopSpeaking() {
+      if (speechSynthesis.speaking) {
+        speechSynthesis.cancel();
+        document.getElementById('ttsButton').style.display = 'block';
+        document.getElementById('stopTtsButton').style.display = 'none';
+        currentUtterance = null;
+      }
+    }
+
+    function updateParticipantCount() {
+      const countElement = document.getElementById('participantCount');
+      if (participants.length === 0) {
+        countElement.textContent = 'Belum ada data peserta';
+      } else {
+        const availableCount = participants.length - winners.length;
+        countElement.textContent = `Total Peserta: ${participants.length} orang\nBelum menang: ${availableCount} orang`;
+        countElement.style.whiteSpace = 'pre-line';
+      }
+    }
+
+    function updateDataStats() {
+      const dataStats = document.getElementById('dataStats');
+      const statTotal = document.getElementById('statTotal');
+      const statWinners = document.getElementById('statWinners');
+      const statRemaining = document.getElementById('statRemaining');
+      const statPercentage = document.getElementById('statPercentage');
+
+      if (participants.length > 0) {
+        dataStats.style.display = 'block';
+        statTotal.textContent = participants.length;
+        statWinners.textContent = winners.length;
+        const remaining = participants.length - winners.length;
+        statRemaining.textContent = remaining;
+
+        const percentage = participants.length > 0 ? ((winners.length / participants.length) * 100).toFixed(1) : 0;
+        statPercentage.textContent = `${percentage}%`;
+      } else {
+        dataStats.style.display = 'none';
+      }
+    }
+
+    function toggleMenu() {
+      const sideMenu = document.getElementById('sideMenu');
+      const menuOverlay = document.getElementById('menuOverlay');
+      sideMenu.classList.toggle('open');
+      menuOverlay.classList.toggle('active');
+    }
+
+    function closeMenu() {
+      const sideMenu = document.getElementById('sideMenu');
+      const menuOverlay = document.getElementById('menuOverlay');
+      sideMenu.classList.remove('open');
+      menuOverlay.classList.remove('active');
+    }
+
+    function closeAllModalsAndMenus() {
+      closeMenu();
+      closeLinkModal();
+      closeImportModal();
+    }
+
+    function showLinkModal() {
+      closeMenu();
+      document.getElementById('linkModal').classList.add('active');
+    }
+
+    function closeLinkModal() {
+      document.getElementById('linkModal').classList.remove('active');
+      document.getElementById('sheetLink').value = '';
+    }
+
+    function showImportModal() {
+      closeMenu();
+      document.getElementById('importModal').classList.add('active');
+    }
+
+    function closeImportModal() {
+      document.getElementById('importModal').classList.remove('active');
+      document.getElementById('pasteArea').value = '';
+    }
+
+    function handleSoundUpload(event, type) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (!file.type.startsWith('audio/')) {
+        showError('File harus berupa audio (MP3, WAV, dll)');
+        event.target.value = '';
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const audioData = e.target.result;
+
+        if (type === 'spin') {
+          spinSoundData = audioData;
+          localStorage.setItem('spinSound', audioData);
+          showError(`✓ Sound Spin berhasil diupload: ${file.name}`);
+        } else if (type === 'winner') {
+          winnerSoundData = audioData;
+          localStorage.setItem('winnerSound', audioData);
+          showError(`✓ Sound Winner berhasil diupload: ${file.name}`);
+        } else if (type === 'stop') {
+          stopSoundData = audioData;
+          localStorage.setItem('stopSound', audioData);
+          showError(`✓ Sound Stop berhasil diupload: ${file.name}`);
+        }
+
+        updateSoundStatus();
+        event.target.value = '';
+      };
+
+      reader.onerror = function () {
+        showError('Gagal membaca file audio');
+        event.target.value = '';
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+    function loadSoundsFromStorage() {
+      const savedSpinSound = localStorage.getItem('spinSound');
+      const savedWinnerSound = localStorage.getItem('winnerSound');
+      const savedStopSound = localStorage.getItem('stopSound');
+
+      if (savedSpinSound) {
+        spinSoundData = savedSpinSound;
+      }
+
+      if (savedWinnerSound) {
+        winnerSoundData = savedWinnerSound;
+      }
+
+      if (savedStopSound) {
+        stopSoundData = savedStopSound;
+      }
+
+      updateSoundStatus();
+    }
+
+    function updateSoundStatus() {
+      const spinStatus = document.getElementById('spinSoundStatus');
+      const winnerStatus = document.getElementById('winnerSoundStatus');
+      const stopStatus = document.getElementById('stopSoundStatus');
+
+      if (spinSoundData) {
+        spinStatus.textContent = '✓ Aktif';
+        spinStatus.style.color = '#27ae60';
+      } else {
+        spinStatus.textContent = 'Tidak ada';
+        spinStatus.style.color = '#e74c3c';
+      }
+
+      if (winnerSoundData) {
+        winnerStatus.textContent = '✓ Aktif';
+        winnerStatus.style.color = '#27ae60';
+      } else {
+        winnerStatus.textContent = 'Tidak ada';
+        winnerStatus.style.color = '#e74c3c';
+      }
+
+      if (stopSoundData) {
+        stopStatus.textContent = '✓ Aktif';
+        stopStatus.style.color = '#27ae60';
+      } else {
+        stopStatus.textContent = 'Tidak ada';
+        stopStatus.style.color = '#e74c3c';
+      }
+    }
+
+    function playSpinSound() {
+      if (spinSoundData) {
+        try {
+          // Hentikan sound spin sebelumnya jika ada
+          stopSpinSound();
+
+          // Buat audio element baru
+          spinAudio = new Audio(spinSoundData);
+          spinAudio.loop = true; // Set loop ke true
+
+          // Coba play audio
+          spinAudio.play().catch(error => {
+            console.error('Error playing spin sound:', error);
+          });
+        } catch (error) {
+          console.error('Failed to create spin audio:', error);
+        }
+      }
+    }
+
+    function stopSpinSound() {
+      if (spinAudio) {
+        spinAudio.pause();
+        spinAudio.currentTime = 0; // Reset ke awal
+        spinAudio = null;
+      }
+    }
+
+    function playStopSound() {
+      if (stopSoundData) {
+        try {
+          const audio = new Audio(stopSoundData);
+          audio.play().catch(error => {
+            console.error('Error playing stop sound:', error);
+          });
+        } catch (error) {
+          console.error('Failed to create stop audio:', error);
+        }
+      }
+    }
+
+    function playWinnerSound() {
+      if (winnerSoundData) {
+        try {
+          const audio = new Audio();
+          audio.src = winnerSoundData;
+          audio.play().catch(error => {
+            console.error('Error playing winner sound:', error);
+          });
+        } catch (error) {
+          console.error('Failed to create winner audio:', error);
+        }
+      }
+    }
+
+    async function processLinkImport() {
+      const linkInput = document.getElementById('sheetLink');
+      const link = linkInput.value.trim();
+
+      if (!link) {
+        showError('Silakan masukkan link Google Sheet');
+        return;
+      }
+
+      // Validate if it's a Google Sheets CSV link
+      if (!link.includes('docs.google.com') && !link.includes('spreadsheets')) {
+        showError('Link harus dari Google Sheets');
+        return;
+      }
+
+      showLoading();
+      closeLinkModal();
+
+      try {
+        // Convert Google Sheets link to CSV export link
+        let csvLink = link;
+        if (link.includes('/edit')) {
+          csvLink = link.replace('/edit', '/export?format=csv');
+        } else if (!link.includes('/export')) {
+          csvLink = link.replace(/\/[^\/]*$/, '/export?format=csv');
+        }
+
+        const response = await fetch(csvLink);
+        if (!response.ok) {
+          throw new Error('Gagal mengambil data dari link');
+        }
+
+        const text = await response.text();
+        document.getElementById('pasteArea').value = text;
+        await processImportData();
+      } catch (error) {
+        hideLoading();
+        showError('Gagal mengambil data: ' + error.message + '. Pastikan sheet sudah dipublish ke web.');
+      }
+    }
+
+    function showLoading() {
+      document.getElementById('loadingIndicator').classList.add('active');
+    }
+
+    function hideLoading() {
+      document.getElementById('loadingIndicator').classList.remove('active');
+    }
+
+    function showError(message) {
+      const errorElement = document.getElementById('errorMessage');
+      errorElement.textContent = message;
+      errorElement.classList.add('active');
+      setTimeout(() => {
+        errorElement.classList.remove('active');
+      }, 5000);
+    }
+
+    function parseCSVLine(line) {
+      const result = [];
+      let current = '';
+      let inQuotes = false;
+
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+
+        if (char === '"') {
+          inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+          result.push(current.trim());
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+      result.push(current.trim());
+
+      return result;
+    }
+
+    async function processImportData() {
+      const pasteArea = document.getElementById('pasteArea');
+      const data = pasteArea.value.trim();
+
+      if (!data) {
+        showError('Tidak ada data untuk diimport');
+        return;
+      }
+
+      showLoading();
+      closeImportModal();
+
+      try {
+        const lines = data.split('\n').filter(line => line.trim());
+        let startIndex = 0;
+
+        // Check if first line is header
+        const firstLine = lines[0].toLowerCase();
+        if (firstLine.includes('timestamp') || firstLine.includes('nomor_pendaftaran') || firstLine.includes('nama')) {
+          startIndex = 1;
+        }
+
+        let successCount = 0;
+        let errorCount = 0;
+        let duplicateCount = 0;
+
+        for (let i = startIndex; i < lines.length; i++) {
+          const columns = parseCSVLine(lines[i]);
+
+          if (columns.length >= 8) {
+            const participant = {
+              timestamp: columns[0] || '',
+              nomor_pendaftaran: columns[1] || '',
+              nik: columns[2] || '',
+              nama: columns[3] || '',
+              kategori: columns[4] || '',
+              instansi: columns[5] || '',
+              telepon: columns[6] || '',
+              alamat: columns[7] || '',
+              id: Date.now() + Math.random() + i // Unique ID
+            };
+
+            if (participant.nomor_pendaftaran && participant.nama) {
+              // Check for duplicates based on nomor_pendaftaran
+              const isDuplicate = participants.some(p =>
+                p.nomor_pendaftaran === participant.nomor_pendaftaran
+              );
+
+              if (!isDuplicate) {
+                participants.push(participant);
+                successCount++;
+              } else {
+                duplicateCount++;
+                errorCount++;
+              }
+            } else {
+              errorCount++;
+            }
+          } else {
+            errorCount++;
+          }
+        }
+
+        saveParticipantsToStorage();
+        updateParticipantCount();
+        updateDataStats();
+        hideLoading();
+
+        let message = `Berhasil import ${successCount} peserta`;
+        if (errorCount > 0) {
+          message += `, ${errorCount} gagal`;
+          if (duplicateCount > 0) {
+            message += ` (${duplicateCount} duplikat)`;
+          }
+        }
+        showError(message);
+
+      } catch (error) {
+        hideLoading();
+        showError('Gagal memproses data: ' + error.message);
+      }
+    }
+
+    async function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      showLoading();
+
+      const reader = new FileReader();
+      reader.onload = async function (e) {
+        const text = e.target.result;
+        document.getElementById('pasteArea').value = text;
+        await processImportData();
+        event.target.value = '';
+      };
+      reader.onerror = function () {
+        hideLoading();
+        showError('Gagal membaca file');
+      };
+      reader.readAsText(file);
+    }
+
+    async function clearAllData() {
+      if (participants.length === 0 && winners.length === 0) {
+        showError('Tidak ada data untuk dihapus');
+        return;
+      }
+
+      const confirmDiv = document.createElement('div');
+      confirmDiv.className = 'modal active';
+      confirmDiv.innerHTML = `
+        <div class="modal-content">
+          <div class="modal-title">Konfirmasi Hapus</div>
+          <p>Yakin ingin menghapus semua data (${participants.length} peserta dan ${winners.length} pemenang)?</p>
+          <div class="modal-buttons">
+            <button class="import-btn" onclick="this.closest('.modal').remove()">Batal</button>
+            <button class="import-btn danger" onclick="confirmClearData(this)">Hapus Semua</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(confirmDiv);
+    }
+
+    async function confirmClearData(button) {
+      button.disabled = true;
+      button.textContent = 'Menghapus...';
+
+      participants = [];
+      winners = [];
+      saveParticipantsToStorage();
+      saveWinnersToStorage();
+      updateParticipantCount();
+      updateWinnersList();
+      updateDataStats();
+
+      button.closest('.modal').remove();
+      showError('Semua data berhasil dihapus');
+    }
+
+    function exportWinners() {
+      if (winners.length === 0) {
+        showError('Belum ada pemenang yang bisa diexport');
+        return;
+      }
+
+      let csvContent = "No,Nomor Pendaftaran,Nama,NIK,Kategori,Instansi,Telepon,Alamat\n";
+
+      winners.forEach((winner, index) => {
+        const p = winner.participant;
+        const row = [
+          index + 1,
+          `"${p.nomor_pendaftaran}"`,
+          `"${p.nama}"`,
+          `"${p.nik}"`,
+          `"${p.kategori}"`,
+          `"${p.instansi}"`,
+          `"${p.telepon}"`,
+          `"${p.alamat}"`
+        ].join(',');
+        csvContent += row + '\n';
+      });
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement("a");
+      const url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", `daftar_pemenang_${new Date().toISOString().split('T')[0]}.csv`);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      showError(`✓ Daftar pemenang berhasil diexport (${winners.length} orang)`);
+    }
+
+    function createConfetti() {
+      const duration = 15 * 1000,
+        animationEnd = Date.now() + duration,
+        defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      const interval = setInterval(function () {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+
+        const particleCount = 50 * (timeLeft / duration);
+
+        // since particles fall down, start a bit higher than random
+        confetti(
+          Object.assign({}, defaults, {
+            particleCount,
+            origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+          })
+        );
+        confetti(
+          Object.assign({}, defaults, {
+            particleCount,
+            origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+          })
+        );
+      }, 250);
+    }
+
+    function spinReel(reelId, duration, finalNumber, reelIndex) {
+      return new Promise((resolve) => {
+        const reel = document.getElementById(reelId);
+        const reelContainer = reel.parentElement;
+
+        // Remove idle state
+        reel.classList.remove('idle');
+
+        // Add spinning state
+        reel.classList.add('spinning');
+        reelContainer.classList.add('spinning-active');
+
+        const timeout = setTimeout(() => {
+          reel.classList.remove('spinning');
+          reelContainer.classList.remove('spinning-active');
+          reelContainer.classList.add('stopping-active');
+
+          // Set final position as CSS variable for stopping animation
+          const offset = -finalNumber * 100;
+          reel.style.setProperty('--final-position', `${offset}px`);
+
+          // Add stopping class
+          reel.classList.add('stopping');
+
+          // Play stop sound for this reel
+          setTimeout(() => {
+            playStopSound();
+          }, 200); // Small delay for better timing
+
+          // After stopping animation completes, set final position
+          setTimeout(() => {
+            reel.classList.remove('stopping');
+            reelContainer.classList.remove('stopping-active');
+            reel.style.transform = `translateY(${offset}px)`;
+            reel.style.transition = 'none';
+            resolve();
+          }, 1500); // Match the stopping animation duration
+        }, duration);
+
+        spinTimeouts.push(timeout);
+      });
+    }
+
+    async function stopSpin() {
+      if (!canStop) return;
+
+      // Hentikan sound spin
+      stopSpinSound();
+
+      // Get list of participants who haven't won yet
+      const availableParticipants = participants.filter(p =>
+        !winners.some(w => w.participant.id === p.id)
+      );
+
+      if (availableParticipants.length === 0) {
+        showError('Semua peserta sudah pernah menang!');
+        return;
+      }
+
+      // Pick random participant from available ones
+      const randomIndex = Math.floor(Math.random() * availableParticipants.length);
+      const randomParticipant = availableParticipants[randomIndex];
+      const winnerNumber = randomParticipant.nomor_pendaftaran;
+      currentWinnerNumber = winnerNumber;
+
+      // Extract only digits from nomor_pendaftaran
+      const digitsOnly = winnerNumber.replace(/\D/g, '');
+
+      // Pad or trim to 6 digits
+      let paddedNumber = digitsOnly.padStart(6, '0');
+      if (paddedNumber.length > 6) {
+        paddedNumber = paddedNumber.slice(-6); // Take last 6 digits
+      }
+
+      const digits = paddedNumber.split('').map(d => parseInt(d));
+
+      // Stop reels one by one with delay
+      await Promise.all([
+        spinReel('reel1', 500, digits[0], 0),
+        spinReel('reel2', 800, digits[1], 1),
+        spinReel('reel3', 1100, digits[2], 2),
+        spinReel('reel4', 1400, digits[3], 3),
+        spinReel('reel5', 1700, digits[4], 4),
+        spinReel('reel6', 2000, digits[5], 5)
+      ]);
+
+      const winnerLabel = config.winner_label || defaultConfig.winner_label;
+      const winnerDisplay = document.getElementById('winnerDisplay');
+      const winnerDetails = document.getElementById('winnerDetails');
+      const ttsControls = document.getElementById('ttsControls');
+
+      // add glow briefly
+      const card = document.getElementById('winnerDisplaySection');
+      card.style.animation = 'none';
+      // force reflow to restart animation
+      void card.offsetWidth;
+      card.style.animation = 'cardPop .6s cubic-bezier(.2,.9,.3,1)';
+
+      // subtle glow via classless inline style
+      card.style.boxShadow = '0 20px 50px rgba(255,183,77,0.12)';
+      setTimeout(() => card.style.boxShadow = '0 8px 30px rgba(0,0,0,0.35)', 900);
+
+      winnerDisplay.innerHTML = `
+      <div class="title-winner">
+        <span class="winner-label"><span class="reveal">🏆 ${winnerLabel} ${randomParticipant.nama}</span></span>
+        <span class="winner-label"><span class="reveal">${winnerNumber}</span></span>  
+      </div>`;
+
+      // Show winner details
+      winnerDetails.style.display = 'block';
+      winnerDetails.innerHTML = `
+        <div class="winner-detail-row">
+          <!-- Left: avatar + name -->
+          <div class="winner-detail-left">
+            <div class="winner-avatar">
+              ${(randomParticipant.nama || '').split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
+            </div>
+            <div class="winner-detail-name">${randomParticipant.nama}</div>
+            <div class="winner-nomor">Nomor: <strong style="color:#667eea;">${randomParticipant.nomor_pendaftaran}</strong></div>
+          </div>
+
+          <!-- Right: details grid -->
+          <div class="winner-detail-right">
+            <div class="winner-detail-card">
+              <div class="winner-detail-label">Instansi</div>
+              <div class="winner-detail-value" style="">${randomParticipant.instansi || '-'}</div>
+            </div>
+
+            <div class="winner-detail-card">
+              <div class="winner-detail-label">Kategori</div>
+              <div class="winner-detail-value">${randomParticipant.kategori || '-'}</div>
+            </div>
+
+            <div class="winner-detail-card">
+              <div class="winner-detail-label">Alamat</div>
+              <div class="winner-detail-value">${randomParticipant.alamat || '-'}</div>
+            </div>
+
+            <div class="winner-detail-card">
+              <div class="winner-detail-label">Telepon</div>
+              <div class="winner-detail-value">${randomParticipant.telepon || '-'}</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Show TTS controls if enabled
+      if (ttsEnabled) {
+        ttsControls.style.display = 'flex';
+        // Auto-speak the winner number after a short delay
+        setTimeout(() => {
+          speakWinnerNumber();
+        }, 1000);
+      } else {
+        ttsControls.style.display = 'none';
+      }
+
+      // Add to winners list
+      winners.push({
+        number: winnerNumber,
+        name: randomParticipant.nama,
+        participant: randomParticipant
+      });
+      saveWinnersToStorage();
+      updateWinnersList();
+      updateParticipantCount();
+      updateDataStats();
+
+      // Play winner sound
+      playWinnerSound();
+
+      createConfetti();
+
+      // Reset reels to idle state after showing winner
+      setTimeout(() => {
+        document.querySelectorAll('.reel-content').forEach((reel, index) => {
+          reel.classList.remove('stopping');
+
+          // Add delay class if this is not the first spin
+          if (hasSpunOnce) {
+            reel.classList.add('delayed');
+
+            // Set custom CSS property for starting position based on winner number
+            const winnerDigit = digits[index];
+            const startOffset = -winnerDigit * 100;
+            reel.style.setProperty('--idle-start-position', `${startOffset}px`);
+          }
+
+          reel.classList.add('idle');
+          reel.style.transition = 'none';
+          reel.style.removeProperty('--final-position');
+        });
+
+        // Remove all reel container effects
+        document.querySelectorAll('.reel').forEach(reelContainer => {
+          reelContainer.classList.remove('spinning-active', 'stopping-active');
+        });
+
+        // Enable spin button based on whether we need to wait for idle animation
+        const spinButton = document.getElementById('spinButton');
+        if (hasSpunOnce) {
+          // Keep button disabled for 30 seconds (until idle animation starts)
+          setTimeout(() => {
+            spinButton.disabled = false;
+            spinButton.style.opacity = '1';
+            spinButton.classList.add('idle');
+            spinButton.style.cursor = 'pointer';
+          }, 30000); // 30 seconds delay
+        } else {
+          // First spin - enable immediately
+          spinButton.disabled = false;
+          spinButton.style.opacity = '1';
+          spinButton.classList.add('idle');
+          spinButton.style.cursor = 'pointer';
+        }
+      }, 3000);
+
+      // Hide stop button, show spin button
+      document.getElementById('stopButton').style.display = 'none';
+      document.getElementById('spinButton').style.display = 'block';
+
+      canStop = false;
+      isSpinning = false;
+      spinTimeouts = [];
+      hasSpunOnce = true;
+    }
+
+    async function spin() {
+      if (isSpinning) return;
+
+      if (participants.length === 0) {
+        showError('Belum ada data peserta. Silakan import data terlebih dahulu.');
+        return;
+      }
+
+      if (winners.length >= participants.length) {
+        showError('Semua peserta sudah pernah menang!');
+        return;
+      }
+
+      isSpinning = true;
+      const spinButton = document.getElementById('spinButton');
+      const stopButton = document.getElementById('stopButton');
+
+      spinButton.classList.remove('idle');
+
+      // Disable spin button immediately
+      spinButton.disabled = true;
+      spinButton.style.opacity = '0.6';
+      spinButton.style.cursor = 'not-allowed';
+
+      spinButton.style.display = 'none';
+      stopButton.style.display = 'block';
+
+      // Enable stop after 1 second
+      setTimeout(() => {
+        canStop = true;
+      }, 1000);
+
+      // Play spin sound (akan terus berulang)
+      playSpinSound();
+
+      const winnerDisplaySection = document.getElementById('winnerDisplaySection');
+      const winnerDisplay = document.getElementById('winnerDisplay');
+      const winnerDetails = document.getElementById('winnerDetails');
+      const ttsControls = document.getElementById('ttsControls');
+
+      winnerDisplaySection.style.display = 'flex';
+      winnerDisplay.innerHTML = '<span class="winner-label">Mengundi... Tekan STOP untuk berhenti</span>';
+      winnerDetails.style.display = 'none';
+      ttsControls.style.display = 'none';
+
+      // Start spinning all reels with cascade effect
+      const reels = ['reel1', 'reel2', 'reel3', 'reel4', 'reel5', 'reel6'];
+
+      reels.forEach((reelId, index) => {
+        const reel = document.getElementById(reelId);
+        const reelContainer = reel.parentElement;
+
+        // Start spinning with cascade effect
+        setTimeout(() => {
+          reel.classList.remove('idle', 'delayed');
+          reel.classList.add('spinning');
+          reelContainer.classList.add('spinning-active');
+
+          // Reset transform when starting to spin
+          reel.style.transform = '';
+
+          // Add random offset to make each reel show different digits
+          const randomOffset = Math.floor(Math.random() * 10) * 100;
+          reel.style.setProperty('--spin-offset', `-${randomOffset}px`);
+        }, index * 100); // 100ms delay between each reel
+      });
+    }
+
+    function updateWinnersList() {
+      const winnersList = document.getElementById('winnersList');
+      const winnersContainer = document.getElementById('winnersContainer');
+
+      if (winners.length > 0) {
+        winnersList.style.display = 'block';
+        winnersContainer.innerHTML = '';
+
+        winners.forEach((winner, index) => {
+          const winnerItem = document.createElement('div');
+          winnerItem.className = 'winner-item';
+          winnerItem.innerHTML = `
+            <div class="winner-rank">Pemenang ${index + 1}</div>
+            <div class="winner-number">${winner.number}</div>
+            <div class="winner-name">${winner.name}</div>
+          `;
+          winnersContainer.appendChild(winnerItem);
+        });
+      } else {
+        winnersList.style.display = 'none';
+      }
+    }
+
+    // Initialize the app when the page loads
+    document.addEventListener('DOMContentLoaded', function () {
+      initializeApp();
+    });
+  </script>
+</body>
+
+</html>
